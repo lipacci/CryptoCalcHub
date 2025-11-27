@@ -1,72 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="description" content="Crypto position size calculator – control risk per trade.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Position Size Calculator – CryptoCalcHub</title>
-  <meta name="description" content="Free position size calculator for crypto. Compute how much to invest on each trade based on account size and risk per trade." />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body class="page-dark">
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">CryptoCalcHub</a>
-      <nav class="main-nav">
-        <a href="profit-calculator.html">Profit calc</a>
-        <a href="dca-calculator.html">DCA calc</a>
-        <a href="position-size-calculator.html" class="active">Position size</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="container">
-    <section class="tool-card">
-      <h1>3. Position Size Calculator – Risk per trade</h1>
-      <p>
-        Compute how much to invest on each trade based on account size, risk % and stop distance.
-      </p>
+<header>
+  <div class="container header-inner">
+    <a class="logo" href="index.html">CryptoCalcHub</a>
+    <nav class="nav">
+      <a href="profit-calculator.html">Profit calc</a>
+      <a href="dca-calculator.html">DCA calc</a>
+      <a class="active" href="position-size-calculator.html">Position size</a>
+    </nav>
+  </div>
+</header>
 
-      <form id="position-form" class="form-grid">
-        <label>
-          Account size
-          <input id="pos-account-size" type="text" inputmode="decimal" placeholder="e.g. 10000" />
-        </label>
+<main class="container">
+  <h1>3. Position Size Calculator – Risk per trade</h1>
 
-        <label>
-          Risk per trade (% of account)
-          <input id="pos-risk-percent" type="text" inputmode="decimal" placeholder="e.g. 1" />
-        </label>
+  <div class="calc-box">
+    <label>Account size</label>
+    <input id="psAccount" type="number" placeholder="1000">
 
-        <label>
-          Entry price
-          <input id="pos-entry-price" type="text" inputmode="decimal" placeholder="e.g. 25000" />
-        </label>
+    <label>Risk per trade (%)</label>
+    <input id="psRisk" type="number" placeholder="1">
 
-        <label>
-          Stop-loss price
-          <input id="pos-stop-price" type="text" inputmode="decimal" placeholder="e.g. 23000" />
-        </label>
+    <label>Entry price</label>
+    <input id="psEntry" type="number" placeholder="30000">
 
-        <button type="submit" class="btn btn-primary full">Calculate position size</button>
-      </form>
+    <label>Stop-loss price</label>
+    <input id="psStop" type="number" placeholder="29000">
 
-      <div id="position-result" class="result-card">
-        <h2>Result</h2>
-        <p class="muted">Fill the form and click “Calculate position size”.</p>
-      </div>
+    <button onclick="calcPositionSize()">Calculate position size</button>
+  </div>
 
-      <p class="tip">
-        Note: this is a simple risk-per-trade helper, not financial advice. Always adapt risk to your own situation.
-      </p>
-    </section>
-  </main>
+  <div class="result-box" id="ps-result"></div>
+</main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <small>CryptoCalcHub – Position size calculator.</small>
-    </div>
-  </footer>
+<!-- Counter -->
+<div style="text-align:center; margin-top:40px; color:#aaa; font-size:14px;">
+  Visitors: <span id="visitor-count">loading...</span>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
+<script>
+  async function updateVisitorCount() {
+    try {
+      const res = await fetch("https://api.countapi.xyz/hit/cryptocalchub/globalcounter");
+      const data = await res.json();
+      document.getElementById("visitor-count").textContent = data.value;
+    } catch (e) {
+      document.getElementById("visitor-count").textContent = "N/A";
+    }
+  }
+  updateVisitorCount();
+</script>
+
 </body>
 </html>
