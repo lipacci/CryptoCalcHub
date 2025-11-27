@@ -1,79 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>DCA Crypto Calculator – CryptoCalcHub</title>
-  <meta name="description" content="Free DCA (Dollar-Cost Averaging) crypto calculator. See the average buy price and result of investing a fixed amount into any coin over time." />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>DCA Crypto Calculator – CryptoCalcHub</title>
+    <meta name="description" content="Simple dollar-cost averaging (DCA) calculator for any crypto. Estimate the result of investing a fixed amount regularly.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="page-dark">
-  <header class="site-header">
+
+<header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="index.html">CryptoCalcHub</a>
-      <nav class="main-nav">
-        <a href="profit-calculator.html">Profit calc</a>
-        <a href="dca-calculator.html" class="active">DCA calc</a>
-        <a href="position-size-calculator.html">Position size</a>
-      </nav>
+        <a class="logo" href="index.html">CryptoCalcHub</a>
+
+        <nav class="nav">
+            <a href="profit-calculator.html">Profit calc</a>
+            <a href="dca-calculator.html" class="active">DCA calc</a>
+            <a href="position-size-calculator.html">Position size</a>
+        </nav>
     </div>
-  </header>
+</header>
 
-  <main class="container page-content">
-    <section class="hero hero-narrow">
-      <h1>DCA Crypto Calculator</h1>
-      <p>
-        Plan or review a Dollar-Cost Averaging strategy into any cryptocurrency.
-        Enter how much you invest per period and your average buy price.
-      </p>
-      <a class="btn-primary" href="index.html#dca-calculator">
-        Open the DCA calculator
-      </a>
-    </section>
+<main class="container">
 
-    <section class="card">
-      <h2>What is DCA?</h2>
-      <p>
-        Dollar-Cost Averaging (DCA) means investing a fixed amount of money
-        at regular intervals, instead of trying to time the perfect entry.
-      </p>
-      <p>
-        This strategy can help smooth out volatility and reduce the emotional
-        pressure of buying dips and tops.
-      </p>
-    </section>
+    <h1 class="page-title">DCA Crypto Calculator</h1>
+    <p class="page-subtitle">
+        Estimate the result of investing a fixed amount at regular intervals into any coin or token.
+    </p>
 
-    <section class="card">
-      <h2>How to use this DCA calculator</h2>
-      <ol>
-        <li>Type an optional asset name (for example BTC or ETH).</li>
-        <li>Enter how much you invest each period (week, month, etc.).</li>
-        <li>Set the number of periods and your average buy price.</li>
-        <li>Click <em>Calculate DCA result</em> on the main page.</li>
-      </ol>
-      <p>
-        The tool will estimate your total invested amount, total coins
-        accumulated and the current value based on the live or manual price.
-      </p>
-    </section>
+    <div class="card">
+        <label>Asset (optional)</label>
+        <input id="asset" type="text" placeholder="e.g. BTC, ETH">
 
-    <section class="card card-affiliate">
-      <h2>Automate your DCA on exchanges</h2>
-      <p>
-        Later we will add referral links so users can create scheduled DCA
-        plans on exchanges like Binance, Bybit and Crypto.com with reduced fees.
-      </p>
-    </section>
-  </main>
+        <label>Amount per period</label>
+        <input id="amountPerPeriod" type="number" placeholder="e.g. 100">
 
-  <footer class="site-footer">
-    <div class="container">
-      <small>© <span id="year"></span> CryptoCalcHub. No financial advice.</small>
+        <label>Number of periods</label>
+        <input id="periods" type="number" placeholder="e.g. 12">
+
+        <label>Average buy price</label>
+        <input id="avgPrice" type="number" placeholder="e.g. 25000">
+
+        <label>Current price</label>
+        <input id="currentPrice" type="number" placeholder="e.g. 32000">
+
+        <button onclick="calculateDCA()" class="btn-primary">Calculate DCA result</button>
     </div>
-  </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    <div id="result-box" class="card result" style="display:none;">
+        <h2>Result</h2>
+        <p><strong>Asset:</strong> <span id="res-asset"></span></p>
+        <p><strong>Total invested:</strong> <span id="res-invested"></span> USD</p>
+        <p><strong>Units accumulated:</strong> <span id="res-units"></span></p>
+        <p><strong>Final value:</strong> <span id="res-final"></span> USD</p>
+        <p><strong>Profit / Loss:</strong> <span id="res-profit"></span> USD</p>
+        <p><strong>Return:</strong> <span id="res-percent"></span>%</p>
+    </div>
+
+</main>
+
+<script>
+function calculateDCA() {
+    const asset = document.getElementById("asset").value || "-";
+    const amountPerPeriod = parseFloat(document.getElementById("amountPerPeriod").value);
+    const periods = parseFloat(document.getElementById("periods").value);
+    const avgPrice = parseFloat(document.getElementById("avgPrice").value);
+    const currentPrice = parseFloat(document.getElementById("currentPrice").value);
+
+    if (!amountPerPeriod || !periods || !avgPrice || !currentPrice) {
+        alert("Please fill all numerical fields.");
+        return;
+    }
+
+    const totalInvested = amountPerPeriod * periods;
+    const units = totalInvested / avgPrice;
+    const finalValue = units * currentPrice;
+    const profit = finalValue - totalInvested;
+    const percent = (profit / totalInvested) * 100;
+
+    document.getElementById("res-asset").textContent = asset;
+    document.getElementById("res-invested").textContent = totalInvested.toFixed(2);
+    document.getElementById("res-units").textContent = units.toFixed(6);
+    document.getElementById("res-final").textContent = finalValue.toFixed(2);
+    document.getElementById("res-profit").textContent = profit.toFixed(2);
+    document.getElementById("res-percent").textContent = percent.toFixed(2);
+
+    document.getElementById("result-box").style.display = "block";
+}
+</script>
+
 </body>
 </html>
