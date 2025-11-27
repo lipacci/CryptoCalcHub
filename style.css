@@ -1,59 +1,295 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  color: #e3e3e3;
-  background: #0b0f16;
+/* CryptoCalcHub basic styling */
+
+:root {
+  --bg: #050816;
+  --bg-card: #0c1022;
+  --accent: #22c55e;
+  --accent-soft: #16a34a;
+  --text: #f9fafb;
+  --muted: #9ca3af;
+  --border: #1f2937;
+  --danger: #f87171;
 }
 
-h1, h2, h3 {
-  font-weight: 600;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #1e293b 0, #020617 55%);
+  color: var(--text);
+}
+
+.page-home {
+  background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+}
+
+.page-dark {
+  background: radial-gradient(circle at top, #020617 0, #020617 55%);
 }
 
 .container {
-  width: 90%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 1.5rem;
 }
 
-.card {
-  background: #111827;
-  padding: 20px;
-  border-radius: 10px;
-  margin: 20px 0;
-  border: 1px solid #1e2635;
+/* Header */
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(10px);
 }
 
-input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  margin: 6px 0 16px 0;
-  background: #1e2635;
-  color: #e3e3e3;
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background: #10b981;
-  color: white;
-  font-size: 16px;
+.logo {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}
+
+.main-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 1rem;
+  font-size: 0.95rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid transparent;
+}
+
+.main-nav a.active,
+.main-nav a:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+/* Hero */
+
+.hero {
+  padding: 2rem 0 1.5rem;
+}
+
+.hero-kicker {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.13em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.hero h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.9rem;
+}
+
+.hero-sub {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  max-width: 36rem;
+}
+
+.hero-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.pill {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.pill-green { background: rgba(34, 197, 94, 0.15); color: #bbf7d0; }
+.pill-blue { background: rgba(59, 130, 246, 0.15); color: #bfdbfe; }
+.pill-purple { background: rgba(147, 51, 234, 0.15); color: #e9d5ff; }
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Buttons */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border: 1px solid transparent;
   cursor: pointer;
 }
 
-button:hover {
-  background: #0f9d6e;
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent-soft);
+  color: #022c22;
+  font-weight: 600;
 }
 
-.result-box {
-  margin-top: 15px;
-  padding: 12px;
-  background: #1e2635;
-  border-radius: 8px;
-  color: #c4f3d5;
+.btn-primary:hover {
+  background: var(--accent-soft);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+}
+
+.btn.full {
+  width: 100%;
+}
+
+/* Cards layout */
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card,
+.sidebar-card,
+.howto-card,
+.tool-card,
+.result-card {
+  background: linear-gradient(135deg, #020617, #020617 55%, #0f172a);
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  padding: 1rem 1.1rem;
+}
+
+.card h2,
+.tool-card h1 {
+  margin-top: 0;
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #93c5fd;
+  text-decoration: none;
+}
+
+.card-link:hover {
+  text-decoration: underline;
+}
+
+.sidebar-card ul {
+  padding-left: 1.2rem;
+}
+
+.small {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.howto-card ol {
+  padding-left: 1.2rem;
+}
+
+.disclaimer {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Forms */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 1rem;
+  margin-top: 1rem;
+}
+
+.form-grid label {
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+input[type="text"] {
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--border);
+  background: #020617;
+  color: var(--text);
+}
+
+input[type="text"]::placeholder {
+  color: #4b5563;
+}
+
+/* Result */
+
+.result-card {
+  margin-top: 1rem;
+}
+
+.result-card p {
+  margin: 0.2rem 0;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.tip {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.error {
+  color: var(--danger);
+}
+
+.green {
+  color: #4ade80;
+}
+
+.red {
+  color: var(--danger);
+}
+
+/* Footer */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+  padding: 0.75rem 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* Responsive */
+
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 }
