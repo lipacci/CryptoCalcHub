@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Crypto Position Size Calculator – CryptoCalcHub</title>
+  <meta name="description" content="Free crypto position size calculator. Risk a fixed percentage of your capital and automatically compute the right trade size." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-dark">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">CryptoCalcHub</a>
+      <nav class="main-nav">
+        <a href="profit-calculator.html">Profit calc</a>
+        <a href="dca-calculator.html">DCA calc</a>
+        <a href="position-size-calculator.html" class="active">Position size</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page-content">
+    <section class="hero hero-narrow">
+      <h1>Crypto Position Size Calculator</h1>
+      <p>
+        Decide how much to risk on each trade and let the math tell you how
+        big your position should be – based on your stop loss and account size.
+      </p>
+      <a class="btn-primary" href="index.html#position-size-calculator">
+        Open the position size calculator
+      </a>
+    </section>
+
+    <section class="card">
+      <h2>Why position sizing matters</h2>
+      <ul>
+        <li>Protects your account from large drawdowns.</li>
+        <li>Keeps your risk per trade consistent (for example 1–2%).</li>
+        <li>Helps you survive long losing streaks.</li>
+        <li>Works for spot, futures and other leveraged products.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>How to use this position size calculator</h2>
+      <ol>
+        <li>Enter your total account size in USD or your local currency.</li>
+        <li>Choose how much you want to risk on this trade (e.g. 1%).</li>
+        <li>Set your entry price and stop-loss price.</li>
+        <li>On the main page calculator you’ll see the correct position size.</li>
+      </ol>
+      <p>
+        Over time, consistent position sizing can be more important than
+        finding the “perfect” entry, especially in volatile crypto markets.
+      </p>
+    </section>
+
+    <section class="card card-affiliate">
+      <h2>Connect to your exchange</h2>
+      <p>
+        In the future we might add guides and affiliate links showing how to
+        apply this position sizing logic directly on Binance, Bybit or other
+        platforms, always with a focus on risk management first.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© <span id="year"></span> CryptoCalcHub. No financial advice.</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
