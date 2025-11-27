@@ -1,65 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Crypto profit calculator – estimate trade returns for any coin or token.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Profit Calculator – CryptoCalcHub</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Crypto Profit Calculator – CryptoCalcHub</title>
+  <meta name="description" content="Free crypto profit calculator. See how much you would make or lose on any trade." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="page-dark">
+<body class="page-tool">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">CryptoCalcHub</a>
+      <nav class="main-nav">
+        <a href="profit-calculator.html" class="active">Profit calc</a>
+        <a href="dca-calculator.html">DCA calc</a>
+        <a href="position-size-calculator.html">Position size</a>
+      </nav>
+    </div>
+  </header>
 
-<header>
-  <div class="container header-inner">
-    <a class="logo" href="index.html">CryptoCalcHub</a>
-    <nav class="nav">
-      <a class="active" href="profit-calculator.html">Profit calc</a>
-      <a href="dca-calculator.html">DCA calc</a>
-      <a href="position-size-calculator.html">Position size</a>
-    </nav>
-  </div>
-</header>
+  <main class="main">
+    <section class="tool-card">
+      <h1>1. Profit Calculator – “What if I bought at…?”</h1>
+      <p class="tool-subtitle">
+        Estimate how much you would make or lose for any trade: set your entry, exit and investment.
+      </p>
 
-<main class="container">
-  <h1>1. Profit Calculator – “What if I bought at…?”</h1>
+      <div class="form-grid">
+        <label>
+          Asset (optional)
+          <input id="profit-asset" type="text" placeholder="e.g. BTC" />
+        </label>
+        <label>
+          Investment amount
+          <input id="profit-investment" type="number" min="0" step="0.01" placeholder="e.g. 1000" />
+        </label>
+        <label>
+          Entry price
+          <input id="profit-entry" type="number" min="0" step="0.01" placeholder="e.g. 30000" />
+        </label>
+        <label>
+          Exit / current price
+          <input id="profit-exit" type="number" min="0" step="0.01" placeholder="e.g. 35000" />
+        </label>
+      </div>
 
-  <div class="calc-box">
-    <label>Asset (optional)</label>
-    <input id="asset" type="text" placeholder="BTC">
+      <button id="profit-btn" class="btn btn-full">Calculate profit</button>
 
-    <label>Investment amount</label>
-    <input id="amount" type="number" placeholder="1000">
+      <div class="result-card" id="profit-result">
+        <h2>Result</h2>
+        <p>Fill the form and click “Calculate profit”.</p>
+      </div>
 
-    <label>Entry price</label>
-    <input id="entry" type="number" placeholder="30000">
+      <p class="tip">
+        Tip: use any past entry and a current price to simulate “How much would I have made if I bought then?”.
+      </p>
+    </section>
+  </main>
 
-    <label>Exit / current price</label>
-    <input id="exit" type="number" placeholder="35000">
-
-    <button onclick="calcProfit()">Calculate profit</button>
-  </div>
-
-  <div class="result-box" id="result"></div>
-</main>
-
-<!-- Counter -->
-<div style="text-align:center; margin-top:40px; color:#aaa; font-size:14px;">
-  Visitors: <span id="visitor-count">loading...</span>
-</div>
-
-<script src="script.js"></script>
-<script>
-  async function updateVisitorCount() {
-    try {
-      const res = await fetch("https://api.countapi.xyz/hit/cryptocalchub/globalcounter");
-      const data = await res.json();
-      document.getElementById("visitor-count").textContent = data.value;
-    } catch (e) {
-      document.getElementById("visitor-count").textContent = "N/A";
-    }
-  }
-  updateVisitorCount();
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
