@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DCA Crypto Calculator – CryptoCalcHub</title>
+  <meta name="description" content="Free DCA (Dollar-Cost Averaging) crypto calculator. See the average buy price and result of investing a fixed amount into any coin over time." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-dark">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">CryptoCalcHub</a>
+      <nav class="main-nav">
+        <a href="profit-calculator.html">Profit calc</a>
+        <a href="dca-calculator.html" class="active">DCA calc</a>
+        <a href="position-size-calculator.html">Position size</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page-content">
+    <section class="hero hero-narrow">
+      <h1>DCA Crypto Calculator</h1>
+      <p>
+        Plan or review a Dollar-Cost Averaging strategy into any cryptocurrency.
+        Enter how much you invest per period and your average buy price.
+      </p>
+      <a class="btn-primary" href="index.html#dca-calculator">
+        Open the DCA calculator
+      </a>
+    </section>
+
+    <section class="card">
+      <h2>What is DCA?</h2>
+      <p>
+        Dollar-Cost Averaging (DCA) means investing a fixed amount of money
+        at regular intervals, instead of trying to time the perfect entry.
+      </p>
+      <p>
+        This strategy can help smooth out volatility and reduce the emotional
+        pressure of buying dips and tops.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>How to use this DCA calculator</h2>
+      <ol>
+        <li>Type an optional asset name (for example BTC or ETH).</li>
+        <li>Enter how much you invest each period (week, month, etc.).</li>
+        <li>Set the number of periods and your average buy price.</li>
+        <li>Click <em>Calculate DCA result</em> on the main page.</li>
+      </ol>
+      <p>
+        The tool will estimate your total invested amount, total coins
+        accumulated and the current value based on the live or manual price.
+      </p>
+    </section>
+
+    <section class="card card-affiliate">
+      <h2>Automate your DCA on exchanges</h2>
+      <p>
+        Later we will add referral links so users can create scheduled DCA
+        plans on exchanges like Binance, Bybit and Crypto.com with reduced fees.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© <span id="year"></span> CryptoCalcHub. No financial advice.</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
