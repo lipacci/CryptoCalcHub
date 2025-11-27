@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <title>Position Size Calculator – CryptoCalcHub</title>
-  <meta name="description" content="Crypto position size calculator. Control risk per trade using account size, risk % and stop-loss." />
+  <meta name="description" content="Risk per trade calculator: position size based on account, risk %% and stop distance." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body class="page-tool">
   <header class="site-header">
@@ -19,36 +20,38 @@
     </div>
   </header>
 
-  <main class="main">
-    <section class="tool-card">
+  <main class="page-main">
+    <section class="tool-panel">
       <h1>3. Position Size Calculator – Risk per trade</h1>
-      <p class="tool-subtitle">
-        Compute how much to invest on each trade based on account size, risk % and stop distance.
+      <p class="tool-sub">
+        Compute how much to invest on each trade based on account size, risk %% and stop distance.
       </p>
 
       <div class="form-grid">
         <label>
           Account size
-          <input id="pos-account" type="number" min="0" step="0.01" placeholder="e.g. 1000" />
+          <input id="pos-account" type="number" step="0.01" placeholder="e.g. 1000" />
         </label>
+
         <label>
-          Risk per trade (% of account)
-          <input id="pos-risk-pct" type="number" min="0" step="0.01" placeholder="e.g. 1" />
+          Risk per trade (%% of account)
+          <input id="pos-riskpct" type="number" step="0.1" placeholder="e.g. 1" />
         </label>
+
         <label>
           Entry price
-          <input id="pos-entry" type="number" min="0" step="0.01" placeholder="e.g. 30000" />
+          <input id="pos-entry" type="number" step="0.01" placeholder="e.g. 30000" />
         </label>
+
         <label>
           Stop-loss price
-          <input id="pos-stop" type="number" min="0" step="0.01" placeholder="e.g. 29000" />
+          <input id="pos-stop" type="number" step="0.01" placeholder="e.g. 29000" />
         </label>
       </div>
 
-      <button id="pos-btn" class="btn btn-full">Calculate position size</button>
+      <button id="btn-pos" class="btn-primary full-width">Calculate position size</button>
 
-      <div class="result-card" id="pos-result">
-        <h2>Result</h2>
+      <div class="result-box" id="pos-result">
         <p>Fill the form and click “Calculate position size”.</p>
       </div>
 
@@ -58,6 +61,8 @@
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <footer class="site-footer">
+    <p id="visitor-counter">Visitors: N/A</p>
+  </footer>
 </body>
 </html>
