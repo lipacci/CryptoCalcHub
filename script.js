@@ -1,75 +1,101 @@
-// ===== PROFIT CALCULATOR =====
-const profitForm = document.getElementById("profit-form");
-const profitResult = document.getElementById("profit-result");
+// scripts.js - CryptoCalcHub
 
-profitForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+window.addEventListener('DOMContentLoaded', () => {
+  // --- PROFIT CALCULATOR ---
+  const profitForm = document.getElementById('profit-form');
+  if (profitForm) {
+    profitForm.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    const amount = parseFloat(document.getElementById("profit-amount").value);
-    const buy = parseFloat(document.getElementById("profit-buy").value);
-    const sell = parseFloat(document.getElementById("profit-sell").value);
+      const amount = parseFloat(document.getElementById('investment-amount').value);
+      const entry = parseFloat(document.getElementById('entry-price').value);
+      const exit = parseFloat(document.getElementById('exit-price').value);
+      const resultEl = document.getElementById('profit-result');
 
-    if (amount > 0 && buy > 0 && sell > 0) {
-        const quantity = amount / buy;
-        const finalValue = quantity * sell;
-        const profit = finalValue - amount;
-        const percent = (profit / amount) * 100;
+      if (isNaN(amount) || isNaN(entry) || isNaN(exit) || amount <= 0 || entry <= 0 || exit <= 0) {
+        resultEl.textContent = 'Please enter valid positive numbers in all fields.';
+        return;
+      }
 
-        profitResult.innerHTML = `
-            <p><strong>Quantity:</strong> ${quantity.toFixed(6)}</p>
-            <p><strong>Final Value:</strong> $${finalValue.toFixed(2)}</p>
-            <p><strong>Profit:</strong> ${profit >= 0 ? "+" : ""}${profit.toFixed(2)} USD (${percent.toFixed(2)}%)</p>
-        `;
-    } else {
-        profitResult.innerHTML = "<p>Please enter valid numbers.</p>";
-    }
-});
+      const qty = amount / entry;
+      const finalValue = qty * exit;
+      const profit = finalValue - amount;
+      const profitPct = (profit / amount) * 100;
 
-// ===== DCA CALCULATOR =====
-const dcaForm = document.getElementById("dca-form");
-const dcaResult = document.getElementById("dca-result");
+      const profitRounded = profit.toFixed(2);
+      const profitPctRounded = profitPct.toFixed(2);
 
-dcaForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+      const label = profit >= 0 ? 'Profit' : 'Loss';
+      resultEl.textContent =
+        `${label}: ${profitRounded} (${profitPctRounded}%) | Final value: ${finalValue.toFixed(2)}`;
+    });
+  }
 
-    const amount = parseFloat(document.getElementById("dca-amount").value);
-    const periods = parseInt(document.getElementById("dca-periods").value);
-    const avgPrice = parseFloat(document.getElementById("dca-price").value);
+  // --- DCA CALCULATOR ---
+  const dcaForm = document.getElementById('dca-form');
+  if (dcaForm) {
+    dcaForm.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    if (amount > 0 && periods > 0 && avgPrice > 0) {
-        const totalInvested = amount * periods;
-        const totalCoins = totalInvested / avgPrice;
+      const amountPerPeriod = parseFloat(document.getElementById('dca-amount').value);
+      const periods = parseInt(document.getElementById('dca-periods').value, 10);
+      const avgPrice = parseFloat(document.getElementById('dca-avg-price').value);
+      const resultEl = document.getElementById('dca-result');
 
-        dcaResult.innerHTML = `
-            <p><strong>Total Invested:</strong> $${totalInvested.toFixed(2)}</p>
-            <p><strong>Total Coins:</strong> ${totalCoins.toFixed(6)}</p>
-            <p><strong>Average Buy Price:</strong> $${avgPrice.toFixed(2)}</p>
-        `;
-    } else {
-        dcaResult.innerHTML = "<p>Please enter valid numbers.</p>";
-    }
-});
+      if (
+        isNaN(amountPerPeriod) ||
+        isNaN(periods) ||
+        isNaN(avgPrice) ||
+        amountPerPeriod <= 0 ||
+        periods <= 0 ||
+        avgPrice <= 0
+      ) {
+        resultEl.textContent = 'Please enter valid positive numbers in all fields.';
+        return;
+      }
 
-// ===== POSITION SIZE CALCULATOR =====
-const sizeForm = document.getElementById("size-form");
-const sizeResult = document.getElementById("size-result");
+      const totalInvested = amountPerPeriod * periods;
+      const totalCoins = totalInvested / avgPrice;
 
-sizeForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+      resultEl.textContent =
+        `Total invested: ${totalInvested.toFixed(2)} | Estimated coins accumulated: ${totalCoins.toFixed(6)}`;
+    });
+  }
 
-    const balance = parseFloat(document.getElementById("size-balance").value);
-    const risk = parseFloat(document.getElementById("size-risk").value);
-    const stop = parseFloat(document.getElementById("size-stop").value);
+  // --- POSITION SIZE CALCULATOR ---
+  const positionForm = document.getElementById('position-form');
+  if (positionForm) {
+    positionForm.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    if (balance > 0 && risk > 0 && stop > 0) {
-        const riskAmount = (balance * risk) / 100;
-        const positionSize = riskAmount / stop;
+      const accountSize = parseFloat(document.getElementById('account-size').value);
+      const riskPercent = parseFloat(document.getElementById('risk-percent').value);
+      const entryPrice = parseFloat(document.getElementById('position-entry').value);
+      const stopPrice = parseFloat(document.getElementById('position-stop').value);
+      const resultEl = document.getElementById('position-result');
 
-        sizeResult.innerHTML = `
-            <p><strong>Risk Amount:</strong> $${riskAmount.toFixed(2)}</p>
-            <p><strong>Position Size:</strong> ${positionSize.toFixed(4)} units</p>
-        `;
-    } else {
-        sizeResult.innerHTML = "<p>Please enter valid numbers.</p>";
-    }
+      if (
+        isNaN(accountSize) ||
+        isNaN(riskPercent) ||
+        isNaN(entryPrice) ||
+        isNaN(stopPrice) ||
+        accountSize <= 0 ||
+        riskPercent <= 0 ||
+        entryPrice <= 0 ||
+        stopPrice <= 0 ||
+        stopPrice === entryPrice
+      ) {
+        resultEl.textContent = 'Please enter valid positive numbers in all fields (entry and stop must be different).';
+        return;
+      }
+
+      const riskAmount = accountSize * (riskPercent / 100);
+      const priceDiff = Math.abs(entryPrice - stopPrice);
+      const positionSize = riskAmount / priceDiff; // in coins
+      const notional = positionSize * entryPrice;
+
+      resultEl.textContent =
+        `Position size: ${positionSize.toFixed(6)} coins | Notional: ${notional.toFixed(2)} | Risk per trade: ${riskAmount.toFixed(2)}`;
+    });
+  }
 });
