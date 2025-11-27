@@ -1,84 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Crypto Profit Calculator – CryptoCalcHub</title>
-  <meta name="description" content="Free crypto profit calculator. See how much you would make or lose on any trade by entering your buy price, sell price, and investment amount." />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>Crypto Profit Calculator – CryptoCalcHub</title>
+    <meta name="description" content="Free crypto profit calculator. See how much you would gain or lose by entering your trade details. Works with any coin or token.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="page-dark">
-  <header class="site-header">
+
+<header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="index.html">CryptoCalcHub</a>
-      <nav class="main-nav">
-        <a href="profit-calculator.html" class="active">Profit calc</a>
-        <a href="dca-calculator.html">DCA calc</a>
-        <a href="position-size-calculator.html">Position size</a>
-      </nav>
+        <a class="logo" href="index.html">CryptoCalcHub</a>
+
+        <nav class="nav">
+            <a href="profit-calculator.html" class="active">Profit calc</a>
+            <a href="dca-calculator.html">DCA calc</a>
+            <a href="position-size-calculator.html">Position size</a>
+        </nav>
     </div>
-  </header>
+</header>
 
-  <main class="container page-content">
-    <section class="hero hero-narrow">
-      <h1>Crypto Profit Calculator</h1>
-      <p>
-        Quickly estimate how much you would make or lose on any crypto trade.
-        Just set your entry price, exit price, and investment amount.
-      </p>
-      <a class="btn-primary" href="index.html#profit-calculator">
-        Open the profit calculator
-      </a>
-    </section>
+<main class="container">
 
-    <section class="card">
-      <h2>How to use this profit calculator</h2>
-      <ol>
-        <li>Choose a coin or token (e.g. BTC, ETH, SOL – optional field).</li>
-        <li>Enter how much you plan to invest in USD or your local currency.</li>
-        <li>Type your <strong>entry price</strong> and the expected <strong>exit price</strong>.</li>
-        <li>Click <em>Calculate profit</em> to see your result in money and percentage.</li>
-      </ol>
-      <p>
-        You can also use it as a “what if” tool: try past prices or future
-        targets and see how much you would have made if you bought earlier, or
-        what a future move could be worth.
-      </p>
-    </section>
+    <h1 class="page-title">Crypto Profit Calculator</h1>
+    <p class="page-subtitle">Easily calculate gains and losses from any crypto trade.</p>
 
-    <section class="card">
-      <h2>Why this tool is useful</h2>
-      <ul>
-        <li>Makes risk/reward visible before you enter a trade.</li>
-        <li>Helps you avoid chasing pumps without knowing the downside.</li>
-        <li>Works with <strong>any crypto or token</strong> – just type the prices.</li>
-        <li>Completely free, no login, no tracking.</li>
-      </ul>
-    </section>
+    <div class="card">
+        <label>Asset (optional)</label>
+        <input id="asset" type="text" placeholder="e.g. BTC, ETH">
 
-    <section class="card card-affiliate">
-      <h2>Trade with lower fees</h2>
-      <p>
-        When your referral links are ready, we’ll place them here so visitors
-        can register on exchanges like Binance, Bybit or Crypto.com with a fee discount.
-      </p>
-      <ul>
-        <li>Binance – coming soon</li>
-        <li>Bybit – coming soon</li>
-        <li>Crypto.com – coming soon</li>
-      </ul>
-    </section>
-  </main>
+        <label>Investment amount</label>
+        <input id="investment" type="number" placeholder="e.g. 1000">
 
-  <footer class="site-footer">
-    <div class="container">
-      <small>© <span id="year"></span> CryptoCalcHub. No financial advice.</small>
+        <label>Entry price</label>
+        <input id="entry" type="number" placeholder="e.g. 20000">
+
+        <label>Exit price</label>
+        <input id="exit" type="number" placeholder="e.g. 30000">
+
+        <button onclick="calculateProfit()" class="btn-primary">Calculate profit</button>
     </div>
-  </footer>
 
-  <script>
-    // Simple footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    <div id="result-box" class="card result" style="display:none;">
+        <h2>Result</h2>
+        <p><strong>Asset:</strong> <span id="res-asset"></span></p>
+        <p><strong>Amount bought:</strong> <span id="res-qty"></span></p>
+        <p><strong>Final value:</strong> <span id="res-final"></span> USD</p>
+        <p><strong>Profit / Loss:</strong> <span id="res-profit"></span> USD</p>
+        <p><strong>Return:</strong> <span id="res-percent"></span>%</p>
+    </div>
+
+</main>
+
+<script>
+function calculateProfit() {
+    const asset = document.getElementById("asset").value || "-";
+    const investment = parseFloat(document.getElementById("investment").value);
+    const entry = parseFloat(document.getElementById("entry").value);
+    const exit = parseFloat(document.getElementById("exit").value);
+
+    if (!investment || !entry || !exit) {
+        alert("Please fill all numerical fields.");
+        return;
+    }
+
+    const qty = investment / entry;
+    const finalValue = qty * exit;
+    const profit = finalValue - investment;
+    const percent = (profit / investment) * 100;
+
+    document.getElementById("res-asset").textContent = asset;
+    document.getElementById("res-qty").textContent = qty.toFixed(6);
+    document.getElementById("res-final").textContent = finalValue.toFixed(2);
+    document.getElementById("res-profit").textContent = profit.toFixed(2);
+    document.getElementById("res-percent").textContent = percent.toFixed(2);
+
+    document.getElementById("result-box").style.display = "block";
+}
+</script>
+
 </body>
 </html>
