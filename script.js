@@ -1,47 +1,25 @@
-// CryptoCalcHub – core calculators
-// This script is shared by all pages.
-
-// Helper: parse number with support for comma or dot
-function parseNum(value) {
-  if (!value) return NaN;
-  return parseFloat(String(value).replace(',', '.'));
+// Helper: format number with 2 decimals and thousands separator
+function fmt(num) {
+  return Number(num).toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 }
 
-// Helper: format number with 2 decimals
-function format2(n) {
-  if (!isFinite(n)) return '—';
-  return n.toLocaleString(undefined, { maximumFractionDigits: 2 });
-}
+/* 1. Profit calculator */
+function initProfitCalculator() {
+  const btn = document.getElementById("profit-btn");
+  if (!btn) return; // not on this page
 
-document.addEventListener('DOMContentLoaded', () => {
-  setupProfitCalculator();
-  setupDcaCalculator();
-  setupPositionSizeCalculator();
-});
+  btn.addEventListener("click", () => {
+    const asset = (document.getElementById("profit-asset").value || "Asset").toUpperCase();
+    const investment = parseFloat(document.getElementById("profit-investment").value);
+    const entry = parseFloat(document.getElementById("profit-entry").value);
+    const exit = parseFloat(document.getElementById("profit-exit").value);
+    const out = document.getElementById("profit-result");
 
-function setupProfitCalculator() {
-  const form = document.getElementById('profit-form');
-  if (!form) return; // not on this page
-
-  const investmentInput = document.getElementById('profit-investment');
-  const entryInput = document.getElementById('profit-entry');
-  const exitInput = document.getElementById('profit-exit');
-  const assetInput = document.getElementById('profit-asset');
-  const resultBox = document.getElementById('profit-result');
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const investment = parseNum(investmentInput.value);
-    const entry = parseNum(entryInput.value);
-    const exit = parseNum(exitInput.value);
-    const asset = (assetInput.value || '').trim() || 'asset';
-
-    if (!isFinite(investment) || !isFinite(entry) || !isFinite(exit) || investment <= 0 || entry <= 0 || exit <= 0) {
-      resultBox.innerHTML = `
-        <h2>Result</h2>
-        <p class="error">Please enter valid positive numbers for investment, entry price and exit price.</p>
-      `;
+    if (!investment || !entry || !exit || investment <= 0 || entry <= 0 || exit <= 0) {
+      out.innerHTML = "<h2>Result</h2><p>Please enter valid positive numbers for all fields.</p>";
       return;
     }
 
@@ -50,99 +28,108 @@ function setupProfitCalculator() {
     const profit = finalValue - investment;
     const profitPct = (profit / investment) * 100;
 
-    resultBox.innerHTML = `
+    out.innerHTML = `
       <h2>Result</h2>
-      <p><strong>Asset:</strong> ${asset.toUpperCase()}</p>
-      <p><strong>Quantity:</strong> ${format2(qty)}</p>
-      <p><strong>Final value:</strong> ${format2(finalValue)}</p>
-      <p><strong>Profit / loss:</strong> <span class="${profit >= 0 ? 'green' : 'red'}">${format2(profit)} (${format2(profitPct)}%)</span></p>
+      <p><span class="result-highlight">Asset:</span> ${asset}</p>
+      <p><span class="result-highlight">Quantity:</span> ${fmt(qty)}</p>
+      <p><span class="result-highlight">Final value:</span> ${fmt(finalValue)}</p>
+      <p><span class="result-highlight">Profit / loss:</span> ${fmt(profit)} (${fmt(profitPct)}%)</p>
     `;
   });
 }
 
-function setupDcaCalculator() {
-  const form = document.getElementById('dca-form');
-  if (!form) return;
+/* 2. DCA calculator */
+function initDcaCalculator() {
+  const btn = document.getElementById("dca-btn");
+  if (!btn) return;
 
-  const amountInput = document.getElementById('dca-amount');
-  const periodsInput = document.getElementById('dca-periods');
-  const avgPriceInput = document.getElementById('dca-average-price');
-  const currentPriceInput = document.getElementById('dca-current-price');
-  const assetInput = document.getElementById('dca-asset');
-  const resultBox = document.getElementById('dca-result');
+  btn.addEventListener("click", () => {
+    const asset = (document.getElementById("dca-asset").value || "Asset").toUpperCase();
+    const amount = parseFloat(document.getElementById("dca-amount").value);
+    const periods = parseFloat(document.getElementById("dca-periods").value);
+    const avgPrice = parseFloat(document.getElementById("dca-avg-price").value);
+    const currentPrice = parseFloat(document.getElementById("dca-current-price").value);
+    const out = document.getElementById("dca-result");
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const amount = parseNum(amountInput.value);
-    const periods = parseNum(periodsInput.value);
-    const avgPrice = parseNum(avgPriceInput.value);
-    const currentPrice = parseNum(currentPriceInput.value);
-    const asset = (assetInput.value || '').trim() || 'asset';
-
-    if (!isFinite(amount) || !isFinite(periods) || !isFinite(avgPrice) || !isFinite(currentPrice) ||
+    if (!amount || !periods || !avgPrice || !currentPrice ||
         amount <= 0 || periods <= 0 || avgPrice <= 0 || currentPrice <= 0) {
-      resultBox.innerHTML = `
-        <h2>Result</h2>
-        <p class="error">Please enter valid positive numbers for all fields.</p>
-      `;
+      out.innerHTML = "<h2>Result</h2><p>Please enter valid positive numbers for all fields.</p>";
       return;
     }
 
     const totalInvested = amount * periods;
-    const totalQty = totalInvested / avgPrice;
-    const finalValue = totalQty * currentPrice;
+    const qty = totalInvested / avgPrice;
+    const finalValue = qty * currentPrice;
     const profit = finalValue - totalInvested;
     const profitPct = (profit / totalInvested) * 100;
 
-    resultBox.innerHTML = `
+    out.innerHTML = `
       <h2>Result</h2>
-      <p><strong>Asset:</strong> ${asset.toUpperCase()}</p>
-      <p><strong>Total invested:</strong> ${format2(totalInvested)}</p>
-      <p><strong>Quantity accumulated:</strong> ${format2(totalQty)}</p>
-      <p><strong>Final value:</strong> ${format2(finalValue)}</p>
-      <p><strong>Profit / loss:</strong> <span class="${profit >= 0 ? 'green' : 'red'}">${format2(profit)} (${format2(profitPct)}%)</span></p>
+      <p><span class="result-highlight">Asset:</span> ${asset}</p>
+      <p><span class="result-highlight">Total invested:</span> ${fmt(totalInvested)}</p>
+      <p><span class="result-highlight">Quantity accumulated:</span> ${fmt(qty)}</p>
+      <p><span class="result-highlight">Final value:</span> ${fmt(finalValue)}</p>
+      <p><span class="result-highlight">Profit / loss:</span> ${fmt(profit)} (${fmt(profitPct)}%)</p>
     `;
   });
 }
 
-function setupPositionSizeCalculator() {
-  const form = document.getElementById('position-form');
-  if (!form) return;
+/* 3. Position size calculator */
+function initPositionCalculator() {
+  const btn = document.getElementById("pos-btn");
+  if (!btn) return;
 
-  const accountInput = document.getElementById('pos-account-size');
-  const riskPctInput = document.getElementById('pos-risk-percent');
-  const entryInput = document.getElementById('pos-entry-price');
-  const stopInput = document.getElementById('pos-stop-price');
-  const resultBox = document.getElementById('position-result');
+  btn.addEventListener("click", () => {
+    const account = parseFloat(document.getElementById("pos-account").value);
+    const riskPct = parseFloat(document.getElementById("pos-risk-pct").value);
+    const entry = parseFloat(document.getElementById("pos-entry").value);
+    const stop = parseFloat(document.getElementById("pos-stop").value);
+    const out = document.getElementById("pos-result");
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const accountSize = parseNum(accountInput.value);
-    const riskPercent = parseNum(riskPctInput.value);
-    const entry = parseNum(entryInput.value);
-    const stop = parseNum(stopInput.value);
-
-    if (!isFinite(accountSize) || !isFinite(riskPercent) || !isFinite(entry) || !isFinite(stop) ||
-        accountSize <= 0 || riskPercent <= 0 || entry <= 0 || stop <= 0 || entry === stop) {
-      resultBox.innerHTML = `
-        <h2>Result</h2>
-        <p class="error">Please enter valid positive numbers. Entry and stop must be different.</p>
-      `;
+    if (!account || !riskPct || !entry || !stop ||
+        account <= 0 || riskPct <= 0 || entry <= 0 || stop <= 0) {
+      out.innerHTML = "<h2>Result</h2><p>Please enter valid positive numbers for all fields.</p>";
       return;
     }
 
-    const riskAmount = accountSize * (riskPercent / 100);
-    const perUnitRisk = Math.abs(entry - stop);
-    const positionSize = riskAmount / perUnitRisk;
-    const notional = positionSize * entry;
+    const riskAmount = (account * riskPct) / 100;
+    const riskPerUnit = Math.abs(entry - stop);
 
-    resultBox.innerHTML = `
+    if (riskPerUnit === 0) {
+      out.innerHTML = "<h2>Result</h2><p>Entry price and stop-loss price must be different.</p>";
+      return;
+    }
+
+    const units = riskAmount / riskPerUnit;
+    const notional = units * entry;
+
+    out.innerHTML = `
       <h2>Result</h2>
-      <p><strong>Risk amount:</strong> ${format2(riskAmount)} (which is ${format2(riskPercent)}% of account)</p>
-      <p><strong>Position size:</strong> ${format2(positionSize)} units</p>
-      <p><strong>Notional value:</strong> ${format2(notional)}</p>
+      <p><span class="result-highlight">Risk amount:</span> ${fmt(riskAmount)} (which is ${fmt(riskPct)}% of account)</p>
+      <p><span class="result-highlight">Position size:</span> ${fmt(units)} units</p>
+      <p><span class="result-highlight">Notional value:</span> ${fmt(notional)}</p>
     `;
   });
 }
+
+/* 4. Local visitor counter (only shows something meaningful on index) */
+function initLocalVisitorCounter() {
+  const el = document.getElementById("visitor-count");
+  if (!el) return;
+
+  const KEY = "cch_local_visits";
+  let count = parseInt(localStorage.getItem(KEY) || "0", 10);
+  if (Number.isNaN(count)) count = 0;
+  count += 1;
+  localStorage.setItem(KEY, String(count));
+
+  el.textContent = "Your visits on this browser: " + count;
+}
+
+/* Init all */
+document.addEventListener("DOMContentLoaded", () => {
+  initProfitCalculator();
+  initDcaCalculator();
+  initPositionCalculator();
+  initLocalVisitorCounter();
+});
