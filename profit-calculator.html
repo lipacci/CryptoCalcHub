@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Crypto Profit Calculator – CryptoCalcHub</title>
+  <title>Profit Calculator – CryptoCalcHub</title>
   <meta name="description" content="Free crypto profit calculator. See how much you would make or lose on any trade." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body class="page-tool">
   <header class="site-header">
@@ -19,11 +20,11 @@
     </div>
   </header>
 
-  <main class="main">
-    <section class="tool-card">
+  <main class="page-main">
+    <section class="tool-panel">
       <h1>1. Profit Calculator – “What if I bought at…?”</h1>
-      <p class="tool-subtitle">
-        Estimate how much you would make or lose for any trade: set your entry, exit and investment.
+      <p class="tool-sub">
+        Estimate how much you would make or lose for any trade: just set your entry, exit and investment.
       </p>
 
       <div class="form-grid">
@@ -31,24 +32,26 @@
           Asset (optional)
           <input id="profit-asset" type="text" placeholder="e.g. BTC" />
         </label>
+
         <label>
           Investment amount
-          <input id="profit-investment" type="number" min="0" step="0.01" placeholder="e.g. 1000" />
+          <input id="profit-investment" type="number" step="0.01" placeholder="e.g. 1000" />
         </label>
+
         <label>
           Entry price
-          <input id="profit-entry" type="number" min="0" step="0.01" placeholder="e.g. 30000" />
+          <input id="profit-entry" type="number" step="0.01" placeholder="e.g. 30000" />
         </label>
+
         <label>
           Exit / current price
-          <input id="profit-exit" type="number" min="0" step="0.01" placeholder="e.g. 35000" />
+          <input id="profit-exit" type="number" step="0.01" placeholder="e.g. 35000" />
         </label>
       </div>
 
-      <button id="profit-btn" class="btn btn-full">Calculate profit</button>
+      <button id="btn-profit" class="btn-primary full-width">Calculate profit</button>
 
-      <div class="result-card" id="profit-result">
-        <h2>Result</h2>
+      <div class="result-box" id="profit-result">
         <p>Fill the form and click “Calculate profit”.</p>
       </div>
 
@@ -58,6 +61,8 @@
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <footer class="site-footer">
+    <p id="visitor-counter">Visitors: N/A</p>
+  </footer>
 </body>
 </html>
