@@ -1,72 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="description" content="Crypto profit calculator – estimate trade returns for any coin or token.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Profit Calculator – CryptoCalcHub</title>
-  <meta name="description" content="Free crypto profit calculator. See how much you would make or lose on any trade by entering your entry, exit and investment." />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body class="page-dark">
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">CryptoCalcHub</a>
-      <nav class="main-nav">
-        <a href="profit-calculator.html" class="active">Profit calc</a>
-        <a href="dca-calculator.html">DCA calc</a>
-        <a href="position-size-calculator.html">Position size</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="container">
-    <section class="tool-card">
-      <h1>1. Profit Calculator – “What if I bought at…”</h1>
-      <p>
-        Estimate how much you would make or lose for any trade: just set your entry, exit and investment.
-      </p>
+<header>
+  <div class="container header-inner">
+    <a class="logo" href="index.html">CryptoCalcHub</a>
+    <nav class="nav">
+      <a class="active" href="profit-calculator.html">Profit calc</a>
+      <a href="dca-calculator.html">DCA calc</a>
+      <a href="position-size-calculator.html">Position size</a>
+    </nav>
+  </div>
+</header>
 
-      <form id="profit-form" class="form-grid">
-        <label>
-          Asset (optional)
-          <input id="profit-asset" type="text" placeholder="e.g. BTC, ETH, SOL" />
-        </label>
+<main class="container">
+  <h1>1. Profit Calculator – “What if I bought at…?”</h1>
 
-        <label>
-          Investment amount
-          <input id="profit-investment" type="text" inputmode="decimal" placeholder="e.g. 1000" />
-        </label>
+  <div class="calc-box">
+    <label>Asset (optional)</label>
+    <input id="asset" type="text" placeholder="BTC">
 
-        <label>
-          Entry price
-          <input id="profit-entry" type="text" inputmode="decimal" placeholder="e.g. 20000" />
-        </label>
+    <label>Investment amount</label>
+    <input id="amount" type="number" placeholder="1000">
 
-        <label>
-          Exit / current price
-          <input id="profit-exit" type="text" inputmode="decimal" placeholder="e.g. 30000" />
-        </label>
+    <label>Entry price</label>
+    <input id="entry" type="number" placeholder="30000">
 
-        <button type="submit" class="btn btn-primary full">Calculate profit</button>
-      </form>
+    <label>Exit / current price</label>
+    <input id="exit" type="number" placeholder="35000">
 
-      <div id="profit-result" class="result-card">
-        <h2>Result</h2>
-        <p class="muted">Fill the form and click “Calculate profit”.</p>
-      </div>
+    <button onclick="calcProfit()">Calculate profit</button>
+  </div>
 
-      <p class="tip">
-        Tip: use any past entry and a current price to simulate “How much would I have made if I bought then?”.
-      </p>
-    </section>
-  </main>
+  <div class="result-box" id="result"></div>
+</main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <small>CryptoCalcHub – Profit calculator.</small>
-    </div>
-  </footer>
+<!-- Counter -->
+<div style="text-align:center; margin-top:40px; color:#aaa; font-size:14px;">
+  Visitors: <span id="visitor-count">loading...</span>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
+<script>
+  async function updateVisitorCount() {
+    try {
+      const res = await fetch("https://api.countapi.xyz/hit/cryptocalchub/globalcounter");
+      const data = await res.json();
+      document.getElementById("visitor-count").textContent = data.value;
+    } catch (e) {
+      document.getElementById("visitor-count").textContent = "N/A";
+    }
+  }
+  updateVisitorCount();
+</script>
+
 </body>
 </html>
