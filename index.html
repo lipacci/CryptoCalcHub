@@ -2,17 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="description" content="Three free crypto calculators: profit, DCA, and position sizing. No login required. Works with any crypto." />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CryptoCalcHub – Free Crypto Calculators</title>
+  <meta name="description" content="Free crypto calculators for profit, DCA and position sizing. Works with any coin or token." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="page-dark">
-
-  <header>
-    <div class="container header-inner">
-      <a class="logo" href="index.html">CryptoCalcHub</a>
-      <nav class="nav">
+<body class="page-home">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">CryptoCalcHub</a>
+      <nav class="main-nav">
         <a href="profit-calculator.html">Profit calc</a>
         <a href="dca-calculator.html">DCA calc</a>
         <a href="position-size-calculator.html">Position size</a>
@@ -20,45 +19,57 @@
     </div>
   </header>
 
-  <main class="container">
-    <h1>Free Crypto Calculators for Smarter Decisions</h1>
-    <p>Three simple tools: profit estimation, DCA returns and position sizing. No login, no cost.</p>
+  <main class="main">
+    <section class="hero">
+      <h1>Free Crypto Calculators for Smarter Decisions</h1>
+      <p class="hero-subtitle">
+        Three simple tools to estimate profit, DCA returns and position size. No login, no cost. Works with any coin or token.
+      </p>
+    </section>
 
-    <div class="card-list">
-      <a class="card" href="profit-calculator.html">
+    <section class="cards">
+      <article class="card">
         <h2>1. Profit Calculator</h2>
-        <p>Simulate any trade: entry, exit, investment.</p>
-      </a>
+        <p class="card-text">
+          Simulate any trade: entry, exit and investment. See how much you would make or lose on any coin or token.
+        </p>
+        <a class="btn" href="profit-calculator.html">Open Profit Calculator</a>
+      </article>
 
-      <a class="card" href="dca-calculator.html">
+      <article class="card">
         <h2>2. DCA Calculator</h2>
-        <p>Estimate long-term returns using Dollar-Cost Averaging.</p>
-      </a>
+        <p class="card-text">
+          Estimate long-term results using Dollar-Cost Averaging with a fixed amount per period.
+        </p>
+        <a class="btn" href="dca-calculator.html">Open DCA Calculator</a>
+      </article>
 
-      <a class="card" href="position-size-calculator.html">
+      <article class="card">
         <h2>3. Position Size Calculator</h2>
-        <p>Control risk on every trade.</p>
-      </a>
-    </div>
+        <p class="card-text">
+          Control risk per trade using your account size, stop-loss distance and % risk per trade.
+        </p>
+        <a class="btn" href="position-size-calculator.html">Open Position Size Calculator</a>
+      </article>
+    </section>
+
+    <section class="info">
+      <h3>How to use these tools</h3>
+      <ul>
+        <li>Start with the <strong>Profit Calculator</strong> to explore “what if” scenarios.</li>
+        <li>Use the <strong>DCA Calculator</strong> to plan regular buys over time.</li>
+        <li>Before entering any trade, use the <strong>Position Size</strong> tool to keep your risk under control.</li>
+      </ul>
+      <p class="disclaimer">
+        No guarantees, no signals – just simple math to make risk more visible. Always do your own research.
+      </p>
+    </section>
+
+    <footer class="site-footer">
+      <span class="visitor-badge" id="visitor-count">Local visits: …</span>
+    </footer>
   </main>
 
-  <!-- Global visitor counter -->
-  <div style="text-align:center; margin-top:40px; color:#aaa; font-size:14px;">
-    Visitors: <span id="visitor-count">loading...</span>
-  </div>
-
-  <script>
-    async function updateVisitorCount() {
-      try {
-        const res = await fetch("https://api.countapi.xyz/hit/cryptocalchub/globalcounter");
-        const data = await res.json();
-        document.getElementById("visitor-count").textContent = data.value;
-      } catch (e) {
-        document.getElementById("visitor-count").textContent = "N/A";
-      }
-    }
-    updateVisitorCount();
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
