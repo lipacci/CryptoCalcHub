@@ -1,135 +1,104 @@
-// Helper: format number with 2 decimals and thousands separator
-function fmt(num) {
-  return Number(num).toLocaleString(undefined, {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
+// --- Helper: format number nicely ---
+function fmt(x) {
+    return Number(x).toLocaleString(undefined, { maximumFractionDigits: 8 });
 }
 
-/* 1. Profit calculator */
-function initProfitCalculator() {
-  const btn = document.getElementById("profit-btn");
-  if (!btn) return; // not on this page
+// ===============================
+// 1. PROFIT CALCULATOR
+// ===============================
+function calculateProfit() {
+    const asset = document.getElementById("profit-asset")?.value || "";
+    const investment = parseFloat(document.getElementById("profit-investment")?.value);
+    const entry = parseFloat(document.getElementById("profit-entry")?.value);
+    const exit = parseFloat(document.getElementById("profit-exit")?.value);
 
-  btn.addEventListener("click", () => {
-    const asset = (document.getElementById("profit-asset").value || "Asset").toUpperCase();
-    const investment = parseFloat(document.getElementById("profit-investment").value);
-    const entry = parseFloat(document.getElementById("profit-entry").value);
-    const exit = parseFloat(document.getElementById("profit-exit").value);
-    const out = document.getElementById("profit-result");
-
-    if (!investment || !entry || !exit || investment <= 0 || entry <= 0 || exit <= 0) {
-      out.innerHTML = "<h2>Result</h2><p>Please enter valid positive numbers for all fields.</p>";
-      return;
+    if (isNaN(investment) || isNaN(entry) || isNaN(exit)) {
+        alert("Please fill all fields correctly.");
+        return;
     }
 
-    const qty = investment / entry;
-    const finalValue = qty * exit;
+    const quantity = investment / entry;
+    const finalValue = quantity * exit;
     const profit = finalValue - investment;
     const profitPct = (profit / investment) * 100;
 
-    out.innerHTML = `
-      <h2>Result</h2>
-      <p><span class="result-highlight">Asset:</span> ${asset}</p>
-      <p><span class="result-highlight">Quantity:</span> ${fmt(qty)}</p>
-      <p><span class="result-highlight">Final value:</span> ${fmt(finalValue)}</p>
-      <p><span class="result-highlight">Profit / loss:</span> ${fmt(profit)} (${fmt(profitPct)}%)</p>
+    document.getElementById("profit-result").innerHTML = `
+        <p><b>Asset:</b> ${asset || "-"}</p>
+        <p><b>Quantity:</b> ${fmt(quantity)}</p>
+        <p><b>Final value:</b> ${fmt(finalValue)}</p>
+        <p><b>Profit / Loss:</b> ${fmt(profit)} (${profitPct.toFixed(2)}%)</p>
     `;
-  });
 }
 
-/* 2. DCA calculator */
-function initDcaCalculator() {
-  const btn = document.getElementById("dca-btn");
-  if (!btn) return;
+// ===============================
+// 2. DCA CALCULATOR
+// ===============================
+function calculateDCA() {
+    const asset = document.getElementById("dca-asset")?.value || "";
+    const amount = parseFloat(document.getElementById("dca-amount")?.value);
+    const periods = parseFloat(document.getElementById("dca-periods")?.value);
+    const avgPrice = parseFloat(document.getElementById("dca-avgprice")?.value);
+    const current = parseFloat(document.getElementById("dca-current")?.value);
 
-  btn.addEventListener("click", () => {
-    const asset = (document.getElementById("dca-asset").value || "Asset").toUpperCase();
-    const amount = parseFloat(document.getElementById("dca-amount").value);
-    const periods = parseFloat(document.getElementById("dca-periods").value);
-    const avgPrice = parseFloat(document.getElementById("dca-avg-price").value);
-    const currentPrice = parseFloat(document.getElementById("dca-current-price").value);
-    const out = document.getElementById("dca-result");
-
-    if (!amount || !periods || !avgPrice || !currentPrice ||
-        amount <= 0 || periods <= 0 || avgPrice <= 0 || currentPrice <= 0) {
-      out.innerHTML = "<h2>Result</h2><p>Please enter valid positive numbers for all fields.</p>";
-      return;
+    if (isNaN(amount) || isNaN(periods) || isNaN(avgPrice) || isNaN(current)) {
+        alert("Please fill all fields correctly.");
+        return;
     }
 
     const totalInvested = amount * periods;
-    const qty = totalInvested / avgPrice;
-    const finalValue = qty * currentPrice;
+    const quantity = totalInvested / avgPrice;
+    const finalValue = quantity * current;
     const profit = finalValue - totalInvested;
     const profitPct = (profit / totalInvested) * 100;
 
-    out.innerHTML = `
-      <h2>Result</h2>
-      <p><span class="result-highlight">Asset:</span> ${asset}</p>
-      <p><span class="result-highlight">Total invested:</span> ${fmt(totalInvested)}</p>
-      <p><span class="result-highlight">Quantity accumulated:</span> ${fmt(qty)}</p>
-      <p><span class="result-highlight">Final value:</span> ${fmt(finalValue)}</p>
-      <p><span class="result-highlight">Profit / loss:</span> ${fmt(profit)} (${fmt(profitPct)}%)</p>
+    document.getElementById("dca-result").innerHTML = `
+        <p><b>Asset:</b> ${asset || "-"}</p>
+        <p><b>Total invested:</b> ${fmt(totalInvested)}</p>
+        <p><b>Quantity accumulated:</b> ${fmt(quantity)}</p>
+        <p><b>Final value:</b> ${fmt(finalValue)}</p>
+        <p><b>Profit / Loss:</b> ${fmt(profit)} (${profitPct.toFixed(2)}%)</p>
     `;
-  });
 }
 
-/* 3. Position size calculator */
-function initPositionCalculator() {
-  const btn = document.getElementById("pos-btn");
-  if (!btn) return;
+// ===============================
+// 3. POSITION SIZE CALCULATOR
+// ===============================
+function calculatePositionSize() {
+    const account = parseFloat(document.getElementById("pos-account")?.value);
+    const riskPct = parseFloat(document.getElementById("pos-riskpct")?.value);
+    const entry = parseFloat(document.getElementById("pos-entry")?.value);
+    const stop = parseFloat(document.getElementById("pos-stop")?.value);
 
-  btn.addEventListener("click", () => {
-    const account = parseFloat(document.getElementById("pos-account").value);
-    const riskPct = parseFloat(document.getElementById("pos-risk-pct").value);
-    const entry = parseFloat(document.getElementById("pos-entry").value);
-    const stop = parseFloat(document.getElementById("pos-stop").value);
-    const out = document.getElementById("pos-result");
-
-    if (!account || !riskPct || !entry || !stop ||
-        account <= 0 || riskPct <= 0 || entry <= 0 || stop <= 0) {
-      out.innerHTML = "<h2>Result</h2><p>Please enter valid positive numbers for all fields.</p>";
-      return;
+    if (isNaN(account) || isNaN(riskPct) || isNaN(entry) || isNaN(stop) || stop >= entry) {
+        alert("Please fill all fields correctly. Stop-loss must be lower than entry.");
+        return;
     }
 
-    const riskAmount = (account * riskPct) / 100;
-    const riskPerUnit = Math.abs(entry - stop);
+    const riskAmount = account * (riskPct / 100);
+    const stopDistance = entry - stop;
+    const positionSize = riskAmount / stopDistance;
+    const notionalValue = positionSize * entry;
 
-    if (riskPerUnit === 0) {
-      out.innerHTML = "<h2>Result</h2><p>Entry price and stop-loss price must be different.</p>";
-      return;
-    }
-
-    const units = riskAmount / riskPerUnit;
-    const notional = units * entry;
-
-    out.innerHTML = `
-      <h2>Result</h2>
-      <p><span class="result-highlight">Risk amount:</span> ${fmt(riskAmount)} (which is ${fmt(riskPct)}% of account)</p>
-      <p><span class="result-highlight">Position size:</span> ${fmt(units)} units</p>
-      <p><span class="result-highlight">Notional value:</span> ${fmt(notional)}</p>
+    document.getElementById("pos-result").innerHTML = `
+        <p><b>Risk amount:</b> ${fmt(riskAmount)} (which is ${riskPct}% of account)</p>
+        <p><b>Position size:</b> ${fmt(positionSize)} units</p>
+        <p><b>Notional value:</b> ${fmt(notionalValue)}</p>
     `;
-  });
 }
 
-/* 4. Local visitor counter (only shows something meaningful on index) */
-function initLocalVisitorCounter() {
-  const el = document.getElementById("visitor-count");
-  if (!el) return;
-
-  const KEY = "cch_local_visits";
-  let count = parseInt(localStorage.getItem(KEY) || "0", 10);
-  if (Number.isNaN(count)) count = 0;
-  count += 1;
-  localStorage.setItem(KEY, String(count));
-
-  el.textContent = "Your visits on this browser: " + count;
-}
-
-/* Init all */
+// ===============================
+// Attach event listeners
+// ===============================
 document.addEventListener("DOMContentLoaded", () => {
-  initProfitCalculator();
-  initDcaCalculator();
-  initPositionCalculator();
-  initLocalVisitorCounter();
+    // Profit calculator button
+    const btnProfit = document.getElementById("btn-profit");
+    if (btnProfit) btnProfit.addEventListener("click", calculateProfit);
+
+    // DCA calculator button
+    const btnDCA = document.getElementById("btn-dca");
+    if (btnDCA) btnDCA.addEventListener("click", calculateDCA);
+
+    // Position size calculator button
+    const btnPos = document.getElementById("btn-pos");
+    if (btnPos) btnPos.addEventListener("click", calculatePositionSize);
 });
