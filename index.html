@@ -3,73 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <title>CryptoCalcHub – Free Crypto Calculators</title>
-  <meta name="description" content="Free crypto calculators for profit, DCA and position sizing. Works with any coin or token." />
+  <meta name="description" content="Free crypto calculators: profit, DCA and position sizing for any coin or token." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
-<body class="page-home">
+<body class="page-index">
   <header class="site-header">
     <div class="header-inner">
       <a href="index.html" class="logo">CryptoCalcHub</a>
-      <nav class="main-nav">
-        <a href="profit-calculator.html">Profit calc</a>
-        <a href="dca-calculator.html">DCA calc</a>
-        <a href="position-size-calculator.html">Position size</a>
-      </nav>
     </div>
   </header>
 
-  <main class="main">
+  <main class="page-main">
     <section class="hero">
       <h1>Free Crypto Calculators for Smarter Decisions</h1>
-      <p class="hero-subtitle">
-        Three simple tools to estimate profit, DCA returns and position size. No login, no cost. Works with any coin or token.
+      <p class="hero-sub">
+        Three simple tools to estimate profit, DCA returns and position size. No login, no cost. Works with any crypto.
       </p>
     </section>
 
     <section class="cards">
-      <article class="card">
+      <article class="tool-card">
         <h2>1. Profit Calculator</h2>
-        <p class="card-text">
-          Simulate any trade: entry, exit and investment. See how much you would make or lose on any coin or token.
-        </p>
-        <a class="btn" href="profit-calculator.html">Open Profit Calculator</a>
+        <p>Simulate any trade: entry, exit and investment. See how much you’d win or lose.</p>
+        <a href="profit-calculator.html" class="btn-primary">Open profit calculator</a>
       </article>
 
-      <article class="card">
+      <article class="tool-card">
         <h2>2. DCA Calculator</h2>
-        <p class="card-text">
-          Estimate long-term results using Dollar-Cost Averaging with a fixed amount per period.
-        </p>
-        <a class="btn" href="dca-calculator.html">Open DCA Calculator</a>
+        <p>Estimate long-term returns using simple Dollar-Cost Averaging on any coin.</p>
+        <a href="dca-calculator.html" class="btn-primary">Open DCA calculator</a>
       </article>
 
-      <article class="card">
+      <article class="tool-card">
         <h2>3. Position Size Calculator</h2>
-        <p class="card-text">
-          Control risk per trade using your account size, stop-loss distance and % risk per trade.
-        </p>
-        <a class="btn" href="position-size-calculator.html">Open Position Size Calculator</a>
+        <p>Control risk on every trade: account size, risk %, entry and stop-loss.</p>
+        <a href="position-size-calculator.html" class="btn-primary">Open position size calculator</a>
       </article>
     </section>
 
-    <section class="info">
+    <section class="info-note">
       <h3>How to use these tools</h3>
       <ul>
-        <li>Start with the <strong>Profit Calculator</strong> to explore “what if” scenarios.</li>
-        <li>Use the <strong>DCA Calculator</strong> to plan regular buys over time.</li>
-        <li>Before entering any trade, use the <strong>Position Size</strong> tool to keep your risk under control.</li>
+        <li>They work with <strong>any exchange</strong>: Binance, Bybit, Crypto.com, ecc.</li>
+        <li>Just type your prices and amounts – everything runs in your browser.</li>
+        <li>No guarantees, no signals – just clean math to make risk more visible.</li>
       </ul>
-      <p class="disclaimer">
-        No guarantees, no signals – just simple math to make risk more visible. Always do your own research.
-      </p>
     </section>
-
-    <footer class="site-footer">
-      <span class="visitor-badge" id="visitor-count">Local visits: …</span>
-    </footer>
   </main>
 
-  <script src="script.js"></script>
+  <footer class="site-footer">
+    <p id="visitor-counter">Visitors: N/A</p>
+  </footer>
 </body>
 </html>
