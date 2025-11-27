@@ -1,65 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Crypto position size calculator – control risk per trade.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
   <title>Position Size Calculator – CryptoCalcHub</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Crypto position size calculator. Control risk per trade using account size, risk % and stop-loss." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="page-dark">
+<body class="page-tool">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">CryptoCalcHub</a>
+      <nav class="main-nav">
+        <a href="profit-calculator.html">Profit calc</a>
+        <a href="dca-calculator.html">DCA calc</a>
+        <a href="position-size-calculator.html" class="active">Position size</a>
+      </nav>
+    </div>
+  </header>
 
-<header>
-  <div class="container header-inner">
-    <a class="logo" href="index.html">CryptoCalcHub</a>
-    <nav class="nav">
-      <a href="profit-calculator.html">Profit calc</a>
-      <a href="dca-calculator.html">DCA calc</a>
-      <a class="active" href="position-size-calculator.html">Position size</a>
-    </nav>
-  </div>
-</header>
+  <main class="main">
+    <section class="tool-card">
+      <h1>3. Position Size Calculator – Risk per trade</h1>
+      <p class="tool-subtitle">
+        Compute how much to invest on each trade based on account size, risk % and stop distance.
+      </p>
 
-<main class="container">
-  <h1>3. Position Size Calculator – Risk per trade</h1>
+      <div class="form-grid">
+        <label>
+          Account size
+          <input id="pos-account" type="number" min="0" step="0.01" placeholder="e.g. 1000" />
+        </label>
+        <label>
+          Risk per trade (% of account)
+          <input id="pos-risk-pct" type="number" min="0" step="0.01" placeholder="e.g. 1" />
+        </label>
+        <label>
+          Entry price
+          <input id="pos-entry" type="number" min="0" step="0.01" placeholder="e.g. 30000" />
+        </label>
+        <label>
+          Stop-loss price
+          <input id="pos-stop" type="number" min="0" step="0.01" placeholder="e.g. 29000" />
+        </label>
+      </div>
 
-  <div class="calc-box">
-    <label>Account size</label>
-    <input id="psAccount" type="number" placeholder="1000">
+      <button id="pos-btn" class="btn btn-full">Calculate position size</button>
 
-    <label>Risk per trade (%)</label>
-    <input id="psRisk" type="number" placeholder="1">
+      <div class="result-card" id="pos-result">
+        <h2>Result</h2>
+        <p>Fill the form and click “Calculate position size”.</p>
+      </div>
 
-    <label>Entry price</label>
-    <input id="psEntry" type="number" placeholder="30000">
+      <p class="tip">
+        Note: this is a simple risk-per-trade helper, not financial advice. Always adapt risk to your own situation.
+      </p>
+    </section>
+  </main>
 
-    <label>Stop-loss price</label>
-    <input id="psStop" type="number" placeholder="29000">
-
-    <button onclick="calcPositionSize()">Calculate position size</button>
-  </div>
-
-  <div class="result-box" id="ps-result"></div>
-</main>
-
-<!-- Counter -->
-<div style="text-align:center; margin-top:40px; color:#aaa; font-size:14px;">
-  Visitors: <span id="visitor-count">loading...</span>
-</div>
-
-<script src="script.js"></script>
-<script>
-  async function updateVisitorCount() {
-    try {
-      const res = await fetch("https://api.countapi.xyz/hit/cryptocalchub/globalcounter");
-      const data = await res.json();
-      document.getElementById("visitor-count").textContent = data.value;
-    } catch (e) {
-      document.getElementById("visitor-count").textContent = "N/A";
-    }
-  }
-  updateVisitorCount();
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
