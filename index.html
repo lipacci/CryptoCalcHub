@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>CryptoCalcHub – Free Crypto Calculators</title>
-  <meta name="description" content="Free crypto calculators to estimate profit, DCA returns and position size. Works with any crypto, any exchange. No login, no cost." />
+  <meta name="description" content="Free crypto calculators to estimate profit, DCA returns and position sizing. No login, no cost. Works with any coin or token." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -11,6 +11,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="index.html">CryptoCalcHub</a>
+
       <nav class="main-nav">
         <a href="profit-calculator.html">Profit calc</a>
         <a href="dca-calculator.html">DCA calc</a>
@@ -19,110 +20,126 @@
     </div>
   </header>
 
-  <main class="container main-content">
-    <section class="hero">
+  <main class="site-main">
+    <!-- HERO -->
+    <section class="hero container">
       <h1>Free Crypto Calculators for Smarter Decisions</h1>
-      <p>
-        Three simple tools to estimate profit, DCA returns and position size.
-        No login, no cost. Works with any crypto.
+      <p class="hero-subtitle">
+        Three simple tools to estimate profit, DCA returns and position size. No login, no cost.
+        Works with any crypto.
       </p>
     </section>
 
-    <!-- Grid con i 3 calcolatori principali -->
-    <section class="card-grid">
+    <!-- 3 CARDS -->
+    <section class="container cards-row">
       <article class="card">
-        <h2 class="card-title">1. Profit Calculator</h2>
-        <p class="card-text">
-          Simulate any trade: entry, exit and investment.
-          See how much you'd win or lose.
+        <h2>1. Profit Calculator</h2>
+        <p>
+          Simulate any trade: entry, exit and investment. See how much you'd win or lose.
         </p>
-        <a class="btn-primary" href="profit-calculator.html">
+        <button class="btn-primary" onclick="window.location.href='profit-calculator.html'">
           Open profit calculator
-        </a>
+        </button>
       </article>
 
       <article class="card">
-        <h2 class="card-title">2. DCA Calculator</h2>
-        <p class="card-text">
+        <h2>2. DCA Calculator</h2>
+        <p>
           Estimate long-term returns using simple Dollar-Cost Averaging on any coin.
         </p>
-        <a class="btn-primary" href="dca-calculator.html">
+        <button class="btn-primary" onclick="window.location.href='dca-calculator.html'">
           Open DCA calculator
-        </a>
+        </button>
       </article>
 
       <article class="card">
-        <h2 class="card-title">3. Position Size Calculator</h2>
-        <p class="card-text">
+        <h2>3. Position Size Calculator</h2>
+        <p>
           Control risk on every trade: account size, risk %, entry and stop-loss.
         </p>
-        <a class="btn-primary" href="position-size-calculator.html">
+        <button class="btn-primary" onclick="window.location.href='position-size-calculator.html'">
           Open position size calculator
-        </a>
+        </button>
       </article>
     </section>
 
-    <!-- Card informativa: come usare gli strumenti, exchange, referral, esempi -->
-    <section class="card card-wide">
-      <h2 class="card-title">How to use these tools</h2>
-      <ul class="bullet-list">
-        <li>They work with any exchange: Binance, Bybit, Crypto.com, etc.</li>
-        <li>Just type your prices and amounts – everything runs in your browser.</li>
-        <li>No guarantees, no signals – just clean math to make risk more visible.</li>
-      </ul>
+    <!-- HOW TO USE + EXCHANGES + REFERRAL -->
+    <section class="container info-section">
+      <article class="card">
+        <h2>How to use these tools</h2>
+        <ul>
+          <li>They work with any exchange: Binance, Bybit, Crypto.com, etc.</li>
+          <li>Just type your prices and amounts — everything runs in your browser.</li>
+          <li>No guarantees, no signals — just clean math to make risk more visible.</li>
+        </ul>
 
-      <hr class="card-divider" />
+        <h3>Works with any exchange</h3>
+        <p>
+          These calculators are fully generic. You can plug in prices and amounts from any spot
+          or derivatives exchange:
+        </p>
+        <ul>
+          <li><strong>Binance</strong> – use spot or futures prices directly from the chart.</li>
+          <li><strong>Bybit</strong> – same logic: entry, exit and size work exactly the same.</li>
+          <li><strong>Crypto.com</strong> – copy last traded price or your planned limit price.</li>
+        </ul>
 
-      <h3 class="card-subtitle">Works with any exchange</h3>
-      <p class="card-text">
-        These calculators are fully generic. You can plug in prices and amounts from
-        <strong>any spot or derivatives exchange</strong>.
-      </p>
-      <ul class="bullet-list">
-        <li><strong>Binance</strong> – use spot or futures prices directly from the chart.</li>
-        <li><strong>Bybit</strong> – same logic: entry, exit and size work exactly the same.</li>
-        <li><strong>Crypto.com</strong> – copy last traded price or your planned limit price.</li>
-      </ul>
-      <p class="note-small">
-        Soon we may add optional referral links (Binance, Bybit, Crypto.com).
-        Using them would help support this project at no extra cost for you.
-      </p>
+        <h3>Support this project (optional)</h3>
+        <p>
+          If these tools are useful and you want to support future updates, you can sign up
+          using these referral links — at no extra cost for you:
+        </p>
+        <ul>
+          <li>
+            <a href="https://www.binance.com/activity/referral-entry/CPA?ref=CPA_00YGO7WMAO"
+               target="_blank" rel="noopener">
+              Binance referral link
+            </a>
+          </li>
+          <li>
+            <a href="https://www.bybit.eu/invite?ref=MAAP2VP"
+               target="_blank" rel="noopener">
+              Bybit referral link
+            </a>
+          </li>
+          <li>
+            <a href="https://crypto.com/app/buzcv9b879"
+               target="_blank" rel="noopener">
+              Crypto.com referral link
+            </a>
+          </li>
+        </ul>
 
-      <hr class="card-divider" />
+        <h3>Quick examples – How it works</h3>
+        <ol>
+          <li>
+            <strong>Profit Calculator</strong> – You buy BTC at 30,000 with an investment of 1,000.
+            Later the price is 35,000. The calculator shows your quantity of BTC, final value and profit.
+          </li>
+          <li>
+            <strong>DCA Calculator</strong> – You invest 100 every month for 12 months, average buy
+            price 25,000 and current price 30,000. The tool shows total invested, accumulated quantity
+            and your current profit on the whole plan.
+          </li>
+          <li>
+            <strong>Position Size Calculator</strong> – Account size 1,000, risk per trade 1%, entry
+            price 30,000, stop-loss 29,000. The calculator tells you how many units you can buy so
+            that a stop-loss hit costs only 1% of your account.
+          </li>
+        </ol>
 
-      <h3 class="card-subtitle">Quick examples – How it works</h3>
-      <ol class="bullet-list numbered">
-        <li>
-          <strong>Profit Calculator</strong> – You buy BTC at <code>30,000</code> with
-          an investment of <code>1,000</code>. Later the price is <code>35,000</code>.
-          The calculator shows your quantity of BTC, final value and profit
-          (around <strong>+16.6%</strong> in this example).
-        </li>
-        <li>
-          <strong>DCA Calculator</strong> – You invest <code>100</code> every month for
-          <code>12</code> months, average buy price <code>25,000</code> and current price
-          <code>30,000</code>. The tool shows total invested, accumulated quantity and
-          your current profit on the whole plan.
-        </li>
-        <li>
-          <strong>Position Size Calculator</strong> – Account size <code>1,000</code>,
-          risk per trade <code>1%</code>, entry price <code>30,000</code>,
-          stop-loss <code>29,000</code>. The calculator tells you how many units
-          you can buy so that a stop-loss hit costs only <strong>10</strong> (1% of your account),
-          plus the notional value of that position.
-        </li>
-      </ol>
-
-      <p class="note">
-        Tip: bookmark this page and use it as a small “risk control center” before
-        confirming any trade.
-      </p>
+        <p class="small-note">
+          Tip: bookmark this page and use it as a small <em>"risk control center"</em> before confirming any trade.
+        </p>
+      </article>
     </section>
-
-    <p class="footer-text">
-      Built with simple HTML, CSS and JavaScript. No tracking, no signup.
-    </p>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Built with simple HTML, CSS and JavaScript. No tracking, no signup.</p>
+    </div>
+  </footer>
 
   <script src="scripts.js"></script>
 </body>
