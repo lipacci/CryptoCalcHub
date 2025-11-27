@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <title>DCA Calculator – CryptoCalcHub</title>
-  <meta name="description" content="Simple DCA calculator for crypto. Estimate long-term returns using Dollar-Cost Averaging." />
+  <meta name="description" content="Simple Dollar-Cost Averaging calculator for any crypto." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body class="page-tool">
   <header class="site-header">
@@ -19,10 +20,10 @@
     </div>
   </header>
 
-  <main class="main">
-    <section class="tool-card">
+  <main class="page-main">
+    <section class="tool-panel">
       <h1>2. DCA Calculator – Simple Dollar-Cost Averaging</h1>
-      <p class="tool-subtitle">
+      <p class="tool-sub">
         Estimate the result of investing a fixed amount regularly into any crypto, using your average buy price.
       </p>
 
@@ -31,28 +32,31 @@
           Asset (optional)
           <input id="dca-asset" type="text" placeholder="e.g. BTC" />
         </label>
+
         <label>
           Amount per period
-          <input id="dca-amount" type="number" min="0" step="0.01" placeholder="e.g. 100" />
+          <input id="dca-amount" type="number" step="0.01" placeholder="e.g. 100" />
         </label>
+
         <label>
           Number of periods
-          <input id="dca-periods" type="number" min="1" step="1" placeholder="e.g. 12" />
+          <input id="dca-periods" type="number" step="1" placeholder="e.g. 12" />
         </label>
+
         <label>
           Average buy price
-          <input id="dca-avg-price" type="number" min="0" step="0.01" placeholder="e.g. 25000" />
+          <input id="dca-avgprice" type="number" step="0.01" placeholder="e.g. 25000" />
         </label>
+
         <label>
           Current price
-          <input id="dca-current-price" type="number" min="0" step="0.01" placeholder="e.g. 30000" />
+          <input id="dca-current" type="number" step="0.01" placeholder="e.g. 30000" />
         </label>
       </div>
 
-      <button id="dca-btn" class="btn btn-full">Calculate DCA result</button>
+      <button id="btn-dca" class="btn-primary full-width">Calculate DCA result</button>
 
-      <div class="result-card" id="dca-result">
-        <h2>Result</h2>
+      <div class="result-box" id="dca-result">
         <p>Fill the form and click “Calculate DCA result”.</p>
       </div>
 
@@ -62,6 +66,8 @@
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <footer class="site-footer">
+    <p id="visitor-counter">Visitors: N/A</p>
+  </footer>
 </body>
 </html>
