@@ -1,77 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="description" content="Crypto DCA calculator – estimate long term returns.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DCA Calculator – CryptoCalcHub</title>
-  <meta name="description" content="Free DCA (Dollar-Cost Averaging) calculator for crypto. Estimate returns of regular investments over time." />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body class="page-dark">
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">CryptoCalcHub</a>
-      <nav class="main-nav">
-        <a href="profit-calculator.html">Profit calc</a>
-        <a href="dca-calculator.html" class="active">DCA calc</a>
-        <a href="position-size-calculator.html">Position size</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="container">
-    <section class="tool-card">
-      <h1>2. DCA Calculator – Simple Dollar-Cost Averaging</h1>
-      <p>
-        Estimate the result of investing a fixed amount regularly into any crypto, using your average buy price.
-      </p>
+<header>
+  <div class="container header-inner">
+    <a class="logo" href="index.html">CryptoCalcHub</a>
+    <nav class="nav">
+      <a href="profit-calculator.html">Profit calc</a>
+      <a class="active" href="dca-calculator.html">DCA calc</a>
+      <a href="position-size-calculator.html">Position size</a>
+    </nav>
+  </div>
+</header>
 
-      <form id="dca-form" class="form-grid">
-        <label>
-          Asset (optional)
-          <input id="dca-asset" type="text" placeholder="e.g. BTC" />
-        </label>
+<main class="container">
+  <h1>2. DCA Calculator – Simple Dollar-Cost Averaging</h1>
 
-        <label>
-          Amount per period
-          <input id="dca-amount" type="text" inputmode="decimal" placeholder="e.g. 100" />
-        </label>
+  <div class="calc-box">
+    <label>Asset (optional)</label>
+    <input id="dcaAsset" type="text" placeholder="BTC">
 
-        <label>
-          Number of periods
-          <input id="dca-periods" type="text" inputmode="decimal" placeholder="e.g. 12" />
-        </label>
+    <label>Amount per period</label>
+    <input id="dcaAmount" type="number" placeholder="100">
 
-        <label>
-          Average buy price
-          <input id="dca-average-price" type="text" inputmode="decimal" placeholder="e.g. 20000" />
-        </label>
+    <label>Number of periods</label>
+    <input id="dcaPeriods" type="number" placeholder="12">
 
-        <label>
-          Current price
-          <input id="dca-current-price" type="text" inputmode="decimal" placeholder="e.g. 30000" />
-        </label>
+    <label>Average buy price</label>
+    <input id="dcaAvg" type="number" placeholder="25000">
 
-        <button type="submit" class="btn btn-primary full">Calculate DCA result</button>
-      </form>
+    <label>Current price</label>
+    <input id="dcaCurrent" type="number" placeholder="30000">
 
-      <div id="dca-result" class="result-card">
-        <h2>Result</h2>
-        <p class="muted">Fill the form and click “Calculate DCA result”.</p>
-      </div>
+    <button onclick="calcDCA()">Calculate DCA result</button>
+  </div>
 
-      <p class="tip">
-        Tip: you can also use this to simulate a future DCA plan by putting a forecast price in “Current price”.
-      </p>
-    </section>
-  </main>
+  <div class="result-box" id="dca-result"></div>
+</main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <small>CryptoCalcHub – DCA calculator.</small>
-    </div>
-  </footer>
+<!-- Counter -->
+<div style="text-align:center; margin-top:40px; color:#aaa; font-size:14px;">
+  Visitors: <span id="visitor-count">loading...</span>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
+<script>
+  async function updateVisitorCount() {
+    try {
+      const res = await fetch("https://api.countapi.xyz/hit/cryptocalchub/globalcounter");
+      const data = await res.json();
+      document.getElementById("visitor-count").textContent = data.value;
+    } catch (e) {
+      document.getElementById("visitor-count").textContent = "N/A";
+    }
+  }
+  updateVisitorCount();
+</script>
+
 </body>
 </html>
