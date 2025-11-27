@@ -1,85 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Crypto Profit Calculator – CryptoCalcHub</title>
-    <meta name="description" content="Free crypto profit calculator. See how much you would gain or lose by entering your trade details. Works with any coin or token.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Profit Calculator – CryptoCalcHub</title>
+  <meta name="description" content="Free crypto profit calculator. See how much you would make or lose on any trade by entering your entry, exit and investment." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body class="page-dark">
-
-<header class="site-header">
+  <header class="site-header">
     <div class="container header-inner">
-        <a class="logo" href="index.html">CryptoCalcHub</a>
-
-        <nav class="nav">
-            <a href="profit-calculator.html" class="active">Profit calc</a>
-            <a href="dca-calculator.html">DCA calc</a>
-            <a href="position-size-calculator.html">Position size</a>
-        </nav>
+      <a href="index.html" class="logo">CryptoCalcHub</a>
+      <nav class="main-nav">
+        <a href="profit-calculator.html" class="active">Profit calc</a>
+        <a href="dca-calculator.html">DCA calc</a>
+        <a href="position-size-calculator.html">Position size</a>
+      </nav>
     </div>
-</header>
+  </header>
 
-<main class="container">
+  <main class="container">
+    <section class="tool-card">
+      <h1>1. Profit Calculator – “What if I bought at…”</h1>
+      <p>
+        Estimate how much you would make or lose for any trade: just set your entry, exit and investment.
+      </p>
 
-    <h1 class="page-title">Crypto Profit Calculator</h1>
-    <p class="page-subtitle">Easily calculate gains and losses from any crypto trade.</p>
+      <form id="profit-form" class="form-grid">
+        <label>
+          Asset (optional)
+          <input id="profit-asset" type="text" placeholder="e.g. BTC, ETH, SOL" />
+        </label>
 
-    <div class="card">
-        <label>Asset (optional)</label>
-        <input id="asset" type="text" placeholder="e.g. BTC, ETH">
+        <label>
+          Investment amount
+          <input id="profit-investment" type="text" inputmode="decimal" placeholder="e.g. 1000" />
+        </label>
 
-        <label>Investment amount</label>
-        <input id="investment" type="number" placeholder="e.g. 1000">
+        <label>
+          Entry price
+          <input id="profit-entry" type="text" inputmode="decimal" placeholder="e.g. 20000" />
+        </label>
 
-        <label>Entry price</label>
-        <input id="entry" type="number" placeholder="e.g. 20000">
+        <label>
+          Exit / current price
+          <input id="profit-exit" type="text" inputmode="decimal" placeholder="e.g. 30000" />
+        </label>
 
-        <label>Exit price</label>
-        <input id="exit" type="number" placeholder="e.g. 30000">
+        <button type="submit" class="btn btn-primary full">Calculate profit</button>
+      </form>
 
-        <button onclick="calculateProfit()" class="btn-primary">Calculate profit</button>
-    </div>
-
-    <div id="result-box" class="card result" style="display:none;">
+      <div id="profit-result" class="result-card">
         <h2>Result</h2>
-        <p><strong>Asset:</strong> <span id="res-asset"></span></p>
-        <p><strong>Amount bought:</strong> <span id="res-qty"></span></p>
-        <p><strong>Final value:</strong> <span id="res-final"></span> USD</p>
-        <p><strong>Profit / Loss:</strong> <span id="res-profit"></span> USD</p>
-        <p><strong>Return:</strong> <span id="res-percent"></span>%</p>
+        <p class="muted">Fill the form and click “Calculate profit”.</p>
+      </div>
+
+      <p class="tip">
+        Tip: use any past entry and a current price to simulate “How much would I have made if I bought then?”.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>CryptoCalcHub – Profit calculator.</small>
     </div>
+  </footer>
 
-</main>
-
-<script>
-function calculateProfit() {
-    const asset = document.getElementById("asset").value || "-";
-    const investment = parseFloat(document.getElementById("investment").value);
-    const entry = parseFloat(document.getElementById("entry").value);
-    const exit = parseFloat(document.getElementById("exit").value);
-
-    if (!investment || !entry || !exit) {
-        alert("Please fill all numerical fields.");
-        return;
-    }
-
-    const qty = investment / entry;
-    const finalValue = qty * exit;
-    const profit = finalValue - investment;
-    const percent = (profit / investment) * 100;
-
-    document.getElementById("res-asset").textContent = asset;
-    document.getElementById("res-qty").textContent = qty.toFixed(6);
-    document.getElementById("res-final").textContent = finalValue.toFixed(2);
-    document.getElementById("res-profit").textContent = profit.toFixed(2);
-    document.getElementById("res-percent").textContent = percent.toFixed(2);
-
-    document.getElementById("result-box").style.display = "block";
-}
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
