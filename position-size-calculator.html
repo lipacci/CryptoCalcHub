@@ -1,114 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Position Size Calculator – CryptoCalcHub</title>
-    <meta name="description" content="Crypto position size calculator. Set account size, risk per trade, entry and stop loss to get safe position size.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Position Size Calculator – CryptoCalcHub</title>
+  <meta name="description" content="Free position size calculator for crypto. Compute how much to invest on each trade based on account size and risk per trade." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body class="page-dark">
-
-<header class="site-header">
+  <header class="site-header">
     <div class="container header-inner">
-        <a class="logo" href="index.html">CryptoCalcHub</a>
-
-        <nav class="nav">
-            <a href="profit-calculator.html">Profit calc</a>
-            <a href="dca-calculator.html">DCA calc</a>
-            <a href="position-size-calculator.html" class="active">Position size</a>
-        </nav>
+      <a href="index.html" class="logo">CryptoCalcHub</a>
+      <nav class="main-nav">
+        <a href="profit-calculator.html">Profit calc</a>
+        <a href="dca-calculator.html">DCA calc</a>
+        <a href="position-size-calculator.html" class="active">Position size</a>
+      </nav>
     </div>
-</header>
+  </header>
 
-<main class="container">
+  <main class="container">
+    <section class="tool-card">
+      <h1>3. Position Size Calculator – Risk per trade</h1>
+      <p>
+        Compute how much to invest on each trade based on account size, risk % and stop distance.
+      </p>
 
-    <h1 class="page-title">Position Size Calculator</h1>
-    <p class="page-subtitle">
-        Keep your risk under control: choose how much to risk on each trade and get the correct position size.
-    </p>
+      <form id="position-form" class="form-grid">
+        <label>
+          Account size
+          <input id="pos-account-size" type="text" inputmode="decimal" placeholder="e.g. 10000" />
+        </label>
 
-    <div class="card">
-        <label>Asset (optional)</label>
-        <input id="asset" type="text" placeholder="e.g. BTC, ETH">
+        <label>
+          Risk per trade (% of account)
+          <input id="pos-risk-percent" type="text" inputmode="decimal" placeholder="e.g. 1" />
+        </label>
 
-        <label>Account size (USD)</label>
-        <input id="accountSize" type="number" placeholder="e.g. 1000">
+        <label>
+          Entry price
+          <input id="pos-entry-price" type="text" inputmode="decimal" placeholder="e.g. 25000" />
+        </label>
 
-        <label>Risk per trade (%)</label>
-        <input id="riskPercent" type="number" placeholder="e.g. 1">
+        <label>
+          Stop-loss price
+          <input id="pos-stop-price" type="text" inputmode="decimal" placeholder="e.g. 23000" />
+        </label>
 
-        <label>Entry price</label>
-        <input id="entryPrice" type="number" placeholder="e.g. 30000">
+        <button type="submit" class="btn btn-primary full">Calculate position size</button>
+      </form>
 
-        <label>Stop loss price</label>
-        <input id="stopPrice" type="number" placeholder="e.g. 28500">
-
-        <label>Take profit price (optional)</label>
-        <input id="tpPrice" type="number" placeholder="e.g. 33000">
-
-        <button onclick="calculatePositionSize()" class="btn-primary">
-            Calculate position size
-        </button>
-    </div>
-
-    <div id="result-box" class="card result" style="display:none;">
+      <div id="position-result" class="result-card">
         <h2>Result</h2>
-        <p><strong>Asset:</strong> <span id="res-asset"></span></p>
-        <p><strong>Risk amount:</strong> <span id="res-risk-amount"></span> USD</p>
-        <p><strong>Position size:</strong> <span id="res-units"></span> units</p>
-        <p><strong>Position notional:</strong> <span id="res-notional"></span> USD</p>
-        <p id="rr-line" style="display:none;">
-            <strong>Risk / Reward:</strong> <span id="res-rr"></span> (R:R)
-        </p>
+        <p class="muted">Fill the form and click “Calculate position size”.</p>
+      </div>
+
+      <p class="tip">
+        Note: this is a simple risk-per-trade helper, not financial advice. Always adapt risk to your own situation.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>CryptoCalcHub – Position size calculator.</small>
     </div>
+  </footer>
 
-</main>
-
-<script>
-function calculatePositionSize() {
-    const asset = document.getElementById("asset").value || "-";
-    const accountSize = parseFloat(document.getElementById("accountSize").value);
-    const riskPercent = parseFloat(document.getElementById("riskPercent").value);
-    const entryPrice = parseFloat(document.getElementById("entryPrice").value);
-    const stopPrice = parseFloat(document.getElementById("stopPrice").value);
-    const tpPrice = parseFloat(document.getElementById("tpPrice").value);
-
-    if (!accountSize || !riskPercent || !entryPrice || !stopPrice) {
-        alert("Please fill account size, risk %, entry and stop loss price.");
-        return;
-    }
-
-    const riskAmount = accountSize * (riskPercent / 100);
-    const perUnitRisk = Math.abs(entryPrice - stopPrice);
-
-    if (perUnitRisk <= 0) {
-        alert("Entry price and stop loss must be different.");
-        return;
-    }
-
-    const units = riskAmount / perUnitRisk;
-    const notional = units * entryPrice;
-
-    document.getElementById("res-asset").textContent = asset;
-    document.getElementById("res-risk-amount").textContent = riskAmount.toFixed(2);
-    document.getElementById("res-units").textContent = units.toFixed(6);
-    document.getElementById("res-notional").textContent = notional.toFixed(2);
-
-    // Risk / Reward if TP provided
-    if (tpPrice && tpPrice !== entryPrice) {
-        const rewardPerUnit = Math.abs(tpPrice - entryPrice);
-        const rr = rewardPerUnit / perUnitRisk;
-        document.getElementById("res-rr").textContent = rr.toFixed(2);
-        document.getElementById("rr-line").style.display = "block";
-    } else {
-        document.getElementById("rr-line").style.display = "none";
-    }
-
-    document.getElementById("result-box").style.display = "block";
-}
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
