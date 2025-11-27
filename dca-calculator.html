@@ -1,94 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>DCA Crypto Calculator – CryptoCalcHub</title>
-    <meta name="description" content="Simple dollar-cost averaging (DCA) calculator for any crypto. Estimate the result of investing a fixed amount regularly.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>DCA Calculator – CryptoCalcHub</title>
+  <meta name="description" content="Free DCA (Dollar-Cost Averaging) calculator for crypto. Estimate returns of regular investments over time." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body class="page-dark">
-
-<header class="site-header">
+  <header class="site-header">
     <div class="container header-inner">
-        <a class="logo" href="index.html">CryptoCalcHub</a>
-
-        <nav class="nav">
-            <a href="profit-calculator.html">Profit calc</a>
-            <a href="dca-calculator.html" class="active">DCA calc</a>
-            <a href="position-size-calculator.html">Position size</a>
-        </nav>
+      <a href="index.html" class="logo">CryptoCalcHub</a>
+      <nav class="main-nav">
+        <a href="profit-calculator.html">Profit calc</a>
+        <a href="dca-calculator.html" class="active">DCA calc</a>
+        <a href="position-size-calculator.html">Position size</a>
+      </nav>
     </div>
-</header>
+  </header>
 
-<main class="container">
+  <main class="container">
+    <section class="tool-card">
+      <h1>2. DCA Calculator – Simple Dollar-Cost Averaging</h1>
+      <p>
+        Estimate the result of investing a fixed amount regularly into any crypto, using your average buy price.
+      </p>
 
-    <h1 class="page-title">DCA Crypto Calculator</h1>
-    <p class="page-subtitle">
-        Estimate the result of investing a fixed amount at regular intervals into any coin or token.
-    </p>
+      <form id="dca-form" class="form-grid">
+        <label>
+          Asset (optional)
+          <input id="dca-asset" type="text" placeholder="e.g. BTC" />
+        </label>
 
-    <div class="card">
-        <label>Asset (optional)</label>
-        <input id="asset" type="text" placeholder="e.g. BTC, ETH">
+        <label>
+          Amount per period
+          <input id="dca-amount" type="text" inputmode="decimal" placeholder="e.g. 100" />
+        </label>
 
-        <label>Amount per period</label>
-        <input id="amountPerPeriod" type="number" placeholder="e.g. 100">
+        <label>
+          Number of periods
+          <input id="dca-periods" type="text" inputmode="decimal" placeholder="e.g. 12" />
+        </label>
 
-        <label>Number of periods</label>
-        <input id="periods" type="number" placeholder="e.g. 12">
+        <label>
+          Average buy price
+          <input id="dca-average-price" type="text" inputmode="decimal" placeholder="e.g. 20000" />
+        </label>
 
-        <label>Average buy price</label>
-        <input id="avgPrice" type="number" placeholder="e.g. 25000">
+        <label>
+          Current price
+          <input id="dca-current-price" type="text" inputmode="decimal" placeholder="e.g. 30000" />
+        </label>
 
-        <label>Current price</label>
-        <input id="currentPrice" type="number" placeholder="e.g. 32000">
+        <button type="submit" class="btn btn-primary full">Calculate DCA result</button>
+      </form>
 
-        <button onclick="calculateDCA()" class="btn-primary">Calculate DCA result</button>
-    </div>
-
-    <div id="result-box" class="card result" style="display:none;">
+      <div id="dca-result" class="result-card">
         <h2>Result</h2>
-        <p><strong>Asset:</strong> <span id="res-asset"></span></p>
-        <p><strong>Total invested:</strong> <span id="res-invested"></span> USD</p>
-        <p><strong>Units accumulated:</strong> <span id="res-units"></span></p>
-        <p><strong>Final value:</strong> <span id="res-final"></span> USD</p>
-        <p><strong>Profit / Loss:</strong> <span id="res-profit"></span> USD</p>
-        <p><strong>Return:</strong> <span id="res-percent"></span>%</p>
+        <p class="muted">Fill the form and click “Calculate DCA result”.</p>
+      </div>
+
+      <p class="tip">
+        Tip: you can also use this to simulate a future DCA plan by putting a forecast price in “Current price”.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>CryptoCalcHub – DCA calculator.</small>
     </div>
+  </footer>
 
-</main>
-
-<script>
-function calculateDCA() {
-    const asset = document.getElementById("asset").value || "-";
-    const amountPerPeriod = parseFloat(document.getElementById("amountPerPeriod").value);
-    const periods = parseFloat(document.getElementById("periods").value);
-    const avgPrice = parseFloat(document.getElementById("avgPrice").value);
-    const currentPrice = parseFloat(document.getElementById("currentPrice").value);
-
-    if (!amountPerPeriod || !periods || !avgPrice || !currentPrice) {
-        alert("Please fill all numerical fields.");
-        return;
-    }
-
-    const totalInvested = amountPerPeriod * periods;
-    const units = totalInvested / avgPrice;
-    const finalValue = units * currentPrice;
-    const profit = finalValue - totalInvested;
-    const percent = (profit / totalInvested) * 100;
-
-    document.getElementById("res-asset").textContent = asset;
-    document.getElementById("res-invested").textContent = totalInvested.toFixed(2);
-    document.getElementById("res-units").textContent = units.toFixed(6);
-    document.getElementById("res-final").textContent = finalValue.toFixed(2);
-    document.getElementById("res-profit").textContent = profit.toFixed(2);
-    document.getElementById("res-percent").textContent = percent.toFixed(2);
-
-    document.getElementById("result-box").style.display = "block";
-}
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
