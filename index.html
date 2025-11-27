@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CryptoCalcHub – Free Crypto Calculators</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Free crypto calculators: profit, DCA and position sizing for any coin or token. Works with any exchange – just plug in your numbers."
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="top-bar">
+      <div class="logo">CRYPTO<span>CALC</span>HUB</div>
+      <nav class="nav-tags">
+        <span class="tag tag-green">No login</span>
+        <span class="tag tag-green">No cost</span>
+        <span class="tag tag-green">Works with any crypto</span>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="hero">
+        <h1>Free Crypto Calculators for Smarter Decisions</h1>
+        <p>
+          Three simple tools to estimate profit, DCA returns and position size
+          for any coin or token.
+        </p>
+        <div class="hero-buttons">
+          <button class="pill pill-primary" data-scroll="profit">Profit &amp; DCA</button>
+          <button class="pill" data-scroll="position">Position sizing</button>
+          <button class="pill" data-scroll="risk">Risk / reward view</button>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <!-- LEFT: CALCULATORS -->
+        <div class="calculators">
+          <!-- PROFIT CALCULATOR -->
+          <section class="card" id="profit">
+            <h2>1. Profit Calculator – “What if I bought at…”</h2>
+            <p class="card-subtitle">
+              Estimate how much you would make or lose for any trade: just set your
+              entry, exit and investment.
+            </p>
+
+            <form id="profit-form" class="form-grid">
+              <div class="field">
+                <label for="profit-asset">Asset (optional)</label>
+                <input id="profit-asset" type="text" placeholder="e.g. BTC, ETH, SOL" />
+              </div>
+
+              <div class="field">
+                <label for="profit-investment">Investment amount</label>
+                <input id="profit-investment" type="number" min="0" step="0.01" placeholder="e.g. 1000" />
+              </div>
+
+              <div class="field">
+                <label for="profit-entry">Entry price</label>
+                <input id="profit-entry" type="number" min="0" step="0.0001" placeholder="e.g. 20000" />
+              </div>
+
+              <div class="field">
+                <label for="profit-exit">Exit / current price</label>
+                <input id="profit-exit" type="number" min="0" step="0.0001" placeholder="e.g. 30000" />
+              </div>
+
+              <button type="submit" class="btn-primary full-width">
+                Calculate profit
+              </button>
+            </form>
+
+            <div id="profit-result" class="result-box">
+              <h3>Result</h3>
+              <p class="muted">Fill the form and click “Calculate profit”.</p>
+            </div>
+
+            <p class="tip">
+              Tip: use any past entry and a current price to simulate
+              “How much would I have made if I bought then?”.
+            </p>
+          </section>
+
+          <!-- DCA CALCULATOR -->
+          <section class="card" id="dca">
+            <h2>2. DCA Calculator – Simple Dollar-Cost Averaging</h2>
+            <p class="card-subtitle">
+              Estimate the result of investing a fixed amount regularly (DCA)
+              into any crypto, using your average buy price.
+            </p>
+
+            <form id="dca-form" class="form-grid">
+              <div class="field">
+                <label for="dca-asset">Asset (optional)</label>
+                <input id="dca-asset" type="text" placeholder="e.g. BTC" />
+              </div>
+
+              <div class="field">
+                <label for="dca-amount">Amount per period</label>
+                <input id="dca-amount" type="number" min="0" step="0.01" placeholder="e.g. 100" />
+              </div>
+
+              <div class="field">
+                <label for="dca-periods">Number of periods</label>
+                <input id="dca-periods" type="number" min="1" step="1" placeholder="e.g. 12" />
+              </div>
+
+              <div class="field">
+                <label for="dca-average">Average buy price</label>
+                <input id="dca-average" type="number" min="0" step="0.0001" placeholder="e.g. 25000" />
+              </div>
+
+              <div class="field">
+                <label for="dca-current">Current price</label>
+                <input id="dca-current" type="number" min="0" step="0.0001" placeholder="e.g. 32000" />
+              </div>
+
+              <button type="submit" class="btn-primary full-width">
+                Calculate DCA result
+              </button>
+            </form>
+
+            <div id="dca-result" class="result-box">
+              <h3>Result</h3>
+              <p class="muted">Enter your DCA plan details and click “Calculate”.</p>
+            </div>
+          </section>
+
+          <!-- POSITION SIZING -->
+          <section class="card" id="position">
+            <h2>3. Position Size Calculator – Risk per Trade</h2>
+            <p class="card-subtitle">
+              Plan your trade size based on account size, risk per trade and stop loss.
+            </p>
+
+            <form id="position-form" class="form-grid">
+              <div class="field">
+                <label for="pos-asset">Asset (optional)</label>
+                <input id="pos-asset" type="text" placeholder="e.g. BTC" />
+              </div>
+
+              <div class="field">
+                <label for="pos-account">Account size (USD)</label>
+                <input id="pos-account" type="number" min="0" step="0.01" placeholder="e.g. 5000" />
+              </div>
+
+              <div class="field">
+                <label for="pos-risk-pct">Risk per trade (%)</label>
+                <input id="pos-risk-pct" type="number" min="0" step="0.1" placeholder="e.g. 1" />
+              </div>
+
+              <div class="field">
+                <label for="pos-entry">Entry price</label>
+                <input id="pos-entry" type="number" min="0" step="0.0001" placeholder="e.g. 25000" />
+              </div>
+
+              <div class="field">
+                <label for="pos-stop">Stop loss price</label>
+                <input id="pos-stop" type="number" min="0" step="0.0001" placeholder="e.g. 24000" />
+              </div>
+
+              <button type="submit" class="btn-primary full-width">
+                Calculate position size
+              </button>
+            </form>
+
+            <div id="position-result" class="result-box">
+              <h3>Result</h3>
+              <p class="muted">
+                Define your risk per trade and stop loss to see how many coins you can buy.
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <!-- RIGHT: EXCHANGES + HOW TO -->
+        <aside class="sidebar" id="risk">
+          <section class="card card-sidebar">
+            <h2>Use with any exchange</h2>
+            <p>
+              These calculators are generic and work with any coin or token.
+              Just plug in the prices and your numbers.
+            </p>
+
+            <ul class="exchange-list">
+              <li>
+                <div class="exchange-name">Binance</div>
+                <div class="exchange-note">
+                  <span class="pill pill-small">referral ready</span><br />
+                  <small>
+                    Use your referral link here:<br />
+                    <code>https://www.binance.com/en/register?ref=YOUR_CODE</code>
+                  </small>
+                </div>
+              </li>
+              <li>
+                <div class="exchange-name">Bybit</div>
+                <div class="exchange-note">
+                  <span class="pill pill-small">referral ready</span><br />
+                  <small>
+                    <code>https://www.bybit.com/invite?ref=YOUR_CODE</code>
+                  </small>
+                </div>
+              </li>
+              <li>
+                <div class="exchange-name">Crypto.com</div>
+                <div class="exchange-note">
+                  <span class="pill pill-small">referral ready</span><br />
+                  <small>
+                    <code>https://crypto.com/app/YOUR_CODE</code>
+                  </small>
+                </div>
+              </li>
+            </ul>
+
+            <p class="muted small">
+              Replace <code>YOUR_CODE</code> with your personal referral IDs once
+              your accounts are ready.
+            </p>
+          </section>
+
+          <section class="card card-sidebar">
+            <h2>How to use this page</h2>
+            <ol class="howto-list">
+              <li>Start with the profit calculator to explore “what if” scenarios.</li>
+              <li>Use the DCA tool to plan regular buys over time.</li>
+              <li>
+                Before entering any trade, use the position size calculator to keep
+                your risk under control.
+              </li>
+            </ol>
+            <p class="muted small">
+              No guarantees, no signals – just simple math to make risk more visible.
+            </p>
+          </section>
+        </aside>
+      </section>
+
+      <footer class="footer">
+        <p>Made by Luca &amp; Nava · CryptoCalcHub</p>
+        <p class="muted small">
+          Educational use only. This page does not provide financial advice or trading
+          signals.
+        </p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
